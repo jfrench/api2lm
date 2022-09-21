@@ -1,8 +1,9 @@
 #' Adjust confidence intervals for multiple comparisons
 #'
-#' A function to produce confidence intervals with a family
-#' confidence coefficient of at least \code{level} for
-#' \code{lm} objects. The function slightly revises the code
+#' A function to produce adjusted confidence intervals with a family-wise
+#' confidence level of at least \code{level} for
+#' \code{lm} objects (not applicable if no adjustment is used).
+#' Internally, the function is a slight revision of the code
 #' used in the \code{\link[stats]{confint.lm}} function.
 #'
 #' Let \code{a = 1 - level}. All intervals are computed
@@ -32,10 +33,15 @@
 #'   (Working-Hotelling).
 #'
 #' @inherit stats::confint.lm return
+#' @return A \code{confint_adjust} object, which is simply a
+#'   a \code{data.frame} with columns \code{term},
+#'   \code{lwr} (the lower confidence limit), and \code{upr}
+#'   (the upper confidence limit).
+#' @seealso \code{\link[stats]{confint.lm}}, \code{\link[api2lm]{confint_adjust}}
 #' @export
 #' @references Bonferroni, C. (1936). Teoria statistica
-#' delle classi e calcolo delle probabilita. Pubblicazioni
-#' del R Istituto Superiore di Scienze Economiche e
+#'   delle classi e calcolo delle probabilita. Pubblicazioni
+#'   del R Istituto Superiore di Scienze Economiche e
 #' Commericiali di Firenze, 8, 3-62.
 #'
 #' Working, H., & Hotelling, H. (1929). Applications of the
@@ -74,10 +80,13 @@ confint_adjust <- function(object, parm, level = 0.95, method = "none") {
   k <- length(parm)
   if (method == "none") {
     fac <- stats::qt(c(a, 1 - a), object$df.residual)
+    adj_level = max(1 - k * (1 - level), 0)
   } else if (method == "bonferroni") {
     fac <- stats::qt(c(a/length(parm), 1 - a/length(parm)), object$df.residual)
+    adj_level = level
   } else if (method == "wh") {
     fac <- c(-1, 1) * sqrt(k * stats::qf(level, df1 = k, df2 = object$df.residual))
+    adj_level = level
   }
   # format returned object
   pct <- format_perc_api2lm(c(a, 1 - a), 3)
@@ -85,6 +94,11 @@ confint_adjust <- function(object, parm, level = 0.95, method = "none") {
               dim = c(length(parm), 2L),
               dimnames = list(parm, pct))
   ci[] <- cf[parm] + ses[parm] %o% fac
+  ci <- data.frame(term = row.names(ci),
+                   lwr = ci[,1],
+                   upr = ci[,2])
+  attributes(ci)$method <- method
+  attributes(ci)$adj_level <- adj_level
+  class(ci) <- c("confint_adjust", class(ci))
   ci
 }
-

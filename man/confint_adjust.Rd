@@ -4,7 +4,7 @@
 \alias{confint_adjust}
 \title{Adjust confidence intervals for multiple comparisons}
 \usage{
-confint_adjust(object, parm, level = 0.95, method = c("none"))
+confint_adjust(object, parm, level = 0.95, method = "none")
 }
 \arguments{
 \item{object}{a fitted model object.}
@@ -15,34 +15,45 @@ confint_adjust(object, parm, level = 0.95, method = c("none"))
 
 \item{level}{the confidence level required.}
 
-\item{method}{A character string indicating the type of adjustment to make. The default choice is \code{"none"}.
-The other available options are \code{"bonferroni"} and \code{"wh"} (Working-Hotelling).}
+\item{method}{A character string indicating the type of
+adjustment to make. The default choice is
+\code{"none"}. The other available options are
+\code{"bonferroni"} and \code{"wh"}
+(Working-Hotelling).}
 }
 \value{
-A matrix (or vector) with columns giving lower and upper confidence
-  limits for each parameter. These will be labelled as (1-level)/2 and
-  1 - (1-level)/2 in \% (by default 2.5\% and 97.5\%).
+A \code{confint_adjust} object, which is simply a
+  a \code{data.frame} with columns \code{term},
+  \code{lwr} (the lower confidence limit), and \code{upr}
+  (the upper confidence limit).
 }
 \description{
-A function to produce confidence intervals with a family confidence
-coefficient of at least \code{level} for `lm` objects. The function
-slightly modifies the code used in the \code{\link[stats]{confint.lm}} function.
+A function to produce adjusted confidence intervals with a family-wise
+confidence level of at least \code{level} for
+\code{lm} objects (not applicable if no adjustment is used).
+Internally, the function is a slight revision of the code
+used in the \code{\link[stats]{confint.lm}} function.
 }
 \details{
-Let \code{a = 1 - level}. All intervals are computed using the formula
-\code{estimate +/- m * ese}, where \code{m} is a multiplier and
-\code{ese} is the estimated standard error of the \code{estimate}.
+Let \code{a = 1 - level}. All intervals are computed
+using the formula \code{estimate +/- m * ese}, where
+\code{m} is a multiplier and \code{ese} is the estimated
+standard error of the \code{estimate}.
 
-\code{method = "none"} (no correction) produces the standard t-based confidence intervals with
-multiplier \code{qt(1 - a/2, df = object$df.residual)}.
+\code{method = "none"} (no correction) produces the
+standard t-based confidence intervals with multiplier
+\code{qt(1 - a/2, df = object$df.residual)}.
 
-\code{method = "bonferroni"} produces Bonferroni-adjusted intervals
-that use the multiplier \code{m = qt(1 - a/(2 * k), df = object$df.residual)},
-where \code{k} is the number of intervals being produced.
+\code{method = "bonferroni"} produces Bonferroni-adjusted
+intervals that use the multiplier \code{m = qt(1 - a/(2 *
+k), df = object$df.residual)}, where \code{k} is the
+number of intervals being produced.
 
-\code{method = "wh"} produces Working-Hotelling-adjusted intervals that
-are valid for all linear combinations of the regression coefficients, which uses
-the multiplier \code{m = sqrt(k * qf(level, df1 = k, df2 = object$df.residual))}.
+\code{method = "wh"} produces Working-Hotelling-adjusted
+intervals that are valid for all linear combinations of
+the regression coefficients, which uses the multiplier
+\code{m = sqrt(k * qf(level, df1 = k, df2 =
+object$df.residual))}.
 }
 \examples{
 ## an extension of the documentation for confint.lm
@@ -55,8 +66,16 @@ confint_adjust(fit, method = "b")
 confint_adjust(fit, method = "wh")
 }
 \references{
-Bonferroni, C. (1936). Teoria statistica delle classi e calcolo delle probabilita. Pubblicazioni del R Istituto Superiore di Scienze Economiche e Commericiali di Firenze, 8, 3-62.
+Bonferroni, C. (1936). Teoria statistica
+  delle classi e calcolo delle probabilita. Pubblicazioni
+  del R Istituto Superiore di Scienze Economiche e
+Commericiali di Firenze, 8, 3-62.
 
-Working, H., & Hotelling, H. (1929). Applications of the theory of error to the interpretation of trends. Journal of the American Statistical Association, 24(165A), 73-85. doi:10.1080/01621459.1929.10506274
-Working, H., & Hotelling, H. (1929). Applications of the theory of error to the interpretation of trends. Journal of the American Statistical Association, 24(165A), 73-85. doi:10.1080/01621459.1929.10506274
+Working, H., & Hotelling, H. (1929). Applications of the
+theory of error to the interpretation of trends. Journal
+of the American Statistical Association, 24(165A), 73-85.
+doi:10.1080/01621459.1929.10506274
+}
+\seealso{
+\code{\link[stats]{confint.lm}}, \code{\link[api2lm]{confint_adjust}}
 }

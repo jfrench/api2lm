@@ -7,20 +7,20 @@
 #' p-values.
 #'
 #' @inheritParams stats::summary.lm
-#' @inheritParams base:signif
-#' @param ...
 #'
 #' @return A \eqn{p \times 4} matrix with columns for the
 #'   estimated coefficient, its standard error, t-statistic
 #'   and corresponding (two-sided) p-value. Aliased
-#'   coefficients are omitted.
+#'   coefficients are omitted. The additional class
+#'   \code{coef_matrix} is added for custom printing.
 #' @export
 #' @author Joshua P. French
 #' @examples
 #' ## a fitted model
 #' fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
 #' coef_matrix(fit)
-coef_matrix <- function(object, digits = 3) {
- signif(summary(object)$coefficients,
-        digits = digits)
+coef_matrix <- function(object) {
+ structure(summary(object)$coefficients,
+           class = c("coef_matrix", "matrix", "array"))
+}
 }
