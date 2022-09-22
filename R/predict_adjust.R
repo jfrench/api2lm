@@ -213,8 +213,8 @@ predict_adjust <- function (object, newdata, se.fit = FALSE, scale = NULL,
       termsconst
     else 0
   }
-  # number of intervals
-  k <- length(ip)
+  # number of predictions
+  k <- length(predictor)
   # adjusted level
   if (method == "none") {
     adj_level <- max(1 - k * (1 - level), 0)
