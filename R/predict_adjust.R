@@ -266,7 +266,7 @@ predict_adjust <- function (object, newdata, se.fit = FALSE, scale = NULL,
   }
   else if (se.fit)
     structure(list(fit = predictor, se.fit = se, df = df, residual.scale = sqrt(res.var)),
-              class = c("predict_adjust", class(predictor)),
+              class = c("predict_adjust", "list"),
               method = method, adj_level = adj_level,
               interval = interval)
   else structure(predictor,

@@ -28,8 +28,11 @@ print.predict_adjust = function(x, ...) {
     }
     cat(paste("\nFamily-wise confidence level of at least",
               attr(x, "adj_level")),"\n\n")
+  }
+
+  if (is.element("matrix", class(x))) {
     print.default(x[seq_len(nrow(x)),], ...)
   } else {
-    print.default(x[length(x)], ...)
+    print.default(x[seq_along(x)], ...)
   }
 }
