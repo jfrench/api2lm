@@ -14,7 +14,8 @@ coef_matrix(object)
 A \eqn{p \times 4} matrix with columns for the
   estimated coefficient, its standard error, t-statistic
   and corresponding (two-sided) p-value. Aliased
-  coefficients are omitted.
+  coefficients are omitted. The additional class
+  \code{coef_matrix} is added for custom printing.
 }
 \description{
 \code{coef_matrix} returns the \code{coefficients}
@@ -27,6 +28,7 @@ p-values.
 ## a fitted model
 fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
 coef_matrix(fit)
+print(coef_matrix(fit), digits = 3)
 }
 \author{
 Joshua P. French

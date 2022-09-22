@@ -25,8 +25,8 @@ A vector of percentages
 A recreation of the \code{stats:::format.prec} function that is only available internally to the \code{stats} package.
 }
 \examples{
-format_perc_api2lm(c(0.5, 0.90, 0.95), digits = 1)
-format_perc_api2lm(c(0.5, 0.90, 0.95), digits = 1)
+format_perc_api2lm(c(0.523423, 0.9098192, 0.951289), digits = 1)
+format_perc_api2lm(c(0.523423, 0.9098192, 0.951289), digits = 3)
 }
 \seealso{
 \code{\link[base]{format}}

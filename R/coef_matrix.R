@@ -19,8 +19,8 @@
 #' ## a fitted model
 #' fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
 #' coef_matrix(fit)
+#' print(coef_matrix(fit), digits = 3)
 coef_matrix <- function(object) {
  structure(summary(object)$coefficients,
            class = c("coef_matrix", "matrix", "array"))
-}
 }

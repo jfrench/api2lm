@@ -6,7 +6,8 @@
 #' Internally, the function is a slight revision of the code
 #' used in the \code{\link[stats]{confint.lm}} function.
 #'
-#' Let \code{a = 1 - level}. All intervals are computed
+#' Let \code{a = 1 - level}. Let \code{p} be the number of
+#' estimated coefficients in the fitted model. All intervals are computed
 #' using the formula \code{estimate +/- m * ese}, where
 #' \code{m} is a multiplier and \code{ese} is the estimated
 #' standard error of the \code{estimate}.
@@ -23,7 +24,7 @@
 #' \code{method = "wh"} produces Working-Hotelling-adjusted
 #' intervals that are valid for all linear combinations of
 #' the regression coefficients, which uses the multiplier
-#' \code{m = sqrt(k * qf(level, df1 = k, df2 =
+#' \code{m = sqrt(p * qf(level, df1 = p, df2 =
 #' object$df.residual))}.
 #' @inheritParams stats::confint.lm
 #' @param method A character string indicating the type of
@@ -32,7 +33,6 @@
 #'   \code{"bonferroni"} and \code{"wh"}
 #'   (Working-Hotelling).
 #'
-#' @inherit stats::confint.lm return
 #' @return A \code{confint_adjust} object, which is simply a
 #'   a \code{data.frame} with columns \code{term},
 #'   \code{lwr} (the lower confidence limit), and \code{upr}
@@ -78,6 +78,7 @@ confint_adjust <- function(object, parm, level = 0.95, method = "none") {
   a <- (1 - level)/2
   # number of intervals
   k <- length(parm)
+  p <- object$rank
   if (method == "none") {
     fac <- stats::qt(c(a, 1 - a), object$df.residual)
     adj_level = max(1 - k * (1 - level), 0)

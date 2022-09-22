@@ -35,7 +35,8 @@ Internally, the function is a slight revision of the code
 used in the \code{\link[stats]{confint.lm}} function.
 }
 \details{
-Let \code{a = 1 - level}. All intervals are computed
+Let \code{a = 1 - level}. Let \code{p} be the number of
+estimated coefficients in the fitted model. All intervals are computed
 using the formula \code{estimate +/- m * ese}, where
 \code{m} is a multiplier and \code{ese} is the estimated
 standard error of the \code{estimate}.
@@ -52,7 +53,7 @@ number of intervals being produced.
 \code{method = "wh"} produces Working-Hotelling-adjusted
 intervals that are valid for all linear combinations of
 the regression coefficients, which uses the multiplier
-\code{m = sqrt(k * qf(level, df1 = k, df2 =
+\code{m = sqrt(p * qf(level, df1 = p, df2 =
 object$df.residual))}.
 }
 \examples{
