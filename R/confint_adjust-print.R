@@ -26,5 +26,5 @@ print.confint_adjust = function(x, ...) {
   }
   cat(paste("\nFamily-wise confidence level of at least",
             attr(x, "adj_level")),"\n\n")
-  print.data.frame(x, row.names = FALSE, ...)
+  print.data.frame(x[c("term", "lwr", "upr")], row.names = FALSE, ...)
 }

@@ -1,60 +1,90 @@
 #' Adjust prediction intervals for multiple comparisons
 #'
-#' A function to produce adjusted confidence/prediction intervals
-#' for predicted mean/new response with a family-wise
-#' confidence level of at least \code{level} for
-#' \code{lm} objects (not applicable if no adjustment is used).
-#' Internally, the function is a slight revision of the code
-#' used in the \code{\link[stats]{predict.lm}} function.
+#' A function to produce adjusted confidence/prediction
+#' intervals for predicted mean/new responses with a
+#' family-wise confidence level of at least \code{level} for
+#' \code{lm} objects (not applicable if no adjustment is
+#' used). Internally, the function is a slight revision of
+#' the code used in the \code{\link[stats]{predict.lm}}
+#' function.
 #'
 #' Let \code{a = 1 - level}. All intervals are computed
 #' using the formula \code{prediction +/- m * epesd}, where
-#' \code{m} is a multiplier and \code{epesd} is the estimated
-#' standard deviation of the prediction error of the \code{estimate}.
+#' \code{m} is a multiplier and \code{epesd} is the
+#' estimated standard deviation of the prediction error of
+#' the \code{estimate}.
 #'
 #' \code{method = "none"} (no correction) produces the
 #' standard t-based confidence intervals with multiplier
 #' \code{stats::qt(1 - a/2, df = object$df.residual)}.
 #'
 #' \code{method = "bonferroni"} produces Bonferroni-adjusted
-#' intervals that use the multiplier \code{m = stats::qt(1 - a/(2 *
-#' k), df = object$df.residual)}, where \code{k} is the
-#' number of intervals being produced.
+#' intervals that use the multiplier \code{m = stats::qt(1 -
+#' a/(2 * k), df = object$df.residual)}, where \code{k} is
+#' the number of intervals being produced.
 #'
-#' \code{method = "scheffe"} and \code{interval = "confidence"}
-#' produces Scheffe-adjusted
-#' intervals that use the multiplier
-#' \code{m = sqrt(p * stats::qf(level, df1 = p, df2 =
-#' object$df.residual))}, where \code{p} is the number of
-#' estimated coefficients in the model.
+#' The Working-Hotelling and Scheffe adjustments are distinct;
+#' the Working-Hotelling typically is related to a multiple comparisons adjustment
+#' for confidence intervals of the response mean while the Scheffe adjustment is typically
+#' related to a multiple comparisons adjustment for prediction intervals
+#' for a new response. However, references often uses these names
+#' interchangeably, so we use them equivalently in this function.
 #'
-#' \code{method = "scheffe"} and \code{interval = "prediction"}
-#' produces Scheffe-adjusted
-#' intervals that use the multiplier
-#' \code{m = sqrt(k * stats::qf(level, df1 = k, df2 =
-#' object$df.residual))}, where \code{k} is the number of
-#' intervals being produced.
+#' \code{method = "wh"} (Working-Hotelling) or
+#' \code{method = "scheffe"} and \code{interval =
+#' "confidence"} produces Working-Hotelling-adjusted intervals that
+#' use the multiplier \code{m = sqrt(p * stats::qf(level,
+#' df1 = p, df2 = object$df.residual))}, where \code{p} is
+#' the number of estimated coefficients in the model.
+#'
+#' \code{method = "wh"} (Working-Hotelling) or
+#' \code{method = "scheffe"} and \code{interval =
+#' "prediction"} produces Scheffe-adjusted intervals that
+#' use the multiplier \code{m = sqrt(k * stats::qf(level,
+#' df1 = k, df2 = object$df.residual))}, where \code{k} is
+#' the number of intervals being produced.
 #'
 #' @inheritParams stats::predict.lm
 #' @param method A character string indicating the type of
 #'   adjustment to make. The default choice is
 #'   \code{"none"}. The other available options are
-#'   \code{"bonferroni"} and \code{"scheffe"}.
+#'   \code{"bonferroni"}, \code{"wh"} (Working-Hotelling),
+#'   and \code{"scheffe"}.
 #'
-#' @return
-#' \code{predict_adjust} produces a vector of predictions or
-#' a matrix of predictions and bounds with column names \code{fit},
-#' \code{lwr}, and \code{upr} if \code{interval} is set. For \code{type = "terms"} this
-#' is a matrix with a column per term and may have an attribute \code{"constant"}.
-#' If \code{se.fit} is \code{TRUE}, a list with the following components is returned:
+#' @return \code{predict_adjust} produces:
+#'
+#' A vector of predictions if \code{interval = "none"}.
+#'
+#' A matrix of predictions and bounds with
+#' column names \code{fit}, \code{lwr}, and \code{upr} if
+#' \code{interval} is set. For \code{type = "terms"} this is
+#' a matrix with a column per term and may have an attribute
+#' \code{"constant"}.
+#'
+#' If \code{se.fit} is \code{TRUE}, a
+#' list with the following components is returned:
 #' \itemize{
-#'   \item{fit}{vector or matrix as above}
-#'   \item{se.fit}{standard error of predicted means}
-#'   \item{residual.scale}{residual standard deviations}
-#'   \item{df}{degrees of freedom for residual}
+#'  \item{\code{fit}}{: vector or matrix as above}
+#'  \item{\code{se.fit}}{: standard error of predicted means}
+#'  \item{\code{residual.scale}}{: residual standard deviations}
+#'  \item{\code{df}}{: degrees of freedom for residual}
 #' }
 #' @export
 #' @seealso \code{\link[stats]{predict.lm}}
+#' @references
+#' Bonferroni, C. (1936). Teoria statistica delle classi e
+#' calcolo delle probabilita. Pubblicazioni del R Istituto
+#' Superiore di Scienze Economiche e Commericiali di
+#' Firenze, 8, 3-62.
+#'
+#' Working, H., & Hotelling, H. (1929). Applications of the
+#' theory of error to the interpretation of trends. Journal
+#' of the American Statistical Association, 24(165A), 73-85.
+#' doi:10.1080/01621459.1929.10506274
+#'
+#' Kutner, M. H., Nachtsheim, C. J., Neter, J., & Li, W.
+#' (2004). Applied Linear Statistical Models, 5th edition.
+#' New York: McGraw-Hill/Irwin.
 #' @examples
 #' fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
 #' newdata <- as.data.frame(rbind(
@@ -68,7 +98,7 @@
 #'                method = "bonferroni")
 #' predict_adjust(fit, newdata = newdata,
 #'                interval = "confidence",
-#'                method = "scheffe")
+#'                method = "wh")
 #' predict_adjust(fit, newdata = newdata,
 #'                interval = "prediction",
 #'                method = "scheffe")
@@ -78,7 +108,7 @@ predict_adjust <- function (object, newdata, se.fit = FALSE, scale = NULL,
           type = c("response", "terms"), method = "none",
           terms = NULL, na.action = stats::na.pass,
           pred.var = res.var/weights, weights = 1, ...)  {
-  method <- match.arg(method, c("none", "bonferroni", "scheffe"))
+  method <- match.arg(method, c("none", "bonferroni", "wh", "scheffe"))
   tt <- terms(object)
   if (!inherits(object, "lm"))
     warning("calling predict.lm(<fake-lm-object>) ...")
@@ -227,9 +257,9 @@ predict_adjust <- function (object, newdata, se.fit = FALSE, scale = NULL,
     } else if (method == "bonferroni") {
       tfrac <- stats::qt((1 - level)/2/k, df)
     } else if (method == "scheffe" & interval == "prediction") {
-      tfrac <- -sqrt(k * stats::qf(1 - level, df1 = k, df2 = df))
-    } else if (method == "scheffe" & interval == "confidence") {
-      tfrac <- -sqrt(p * stats::qf(1 - level, df1 = p, df2 = df))
+      tfrac <- -sqrt(k * stats::qf(level, df1 = k, df2 = df))
+    } else if (any(is.element(method, c("wh", "scheffe"))) & interval == "confidence") {
+      tfrac <- -sqrt(p * stats::qf(level, df1 = p, df2 = df))
     }
 
     hwid <- tfrac * switch(interval, confidence = sqrt(ip),

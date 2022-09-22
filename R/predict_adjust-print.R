@@ -25,6 +25,8 @@ print.predict_adjust = function(x, ...) {
       cat(paste("\nScheffe-adjusted", interval, "intervals\n"))
     } else if (method == "bonferroni") {
       cat(paste("\nBonferroni-adjusted", interval, "intervals\n"))
+    } else if (method == "wh") {
+      cat(paste("\nWorking-Hotelling-adjusted", interval, "intervals\n"))
     }
     cat(paste("\nFamily-wise confidence level of at least",
               attr(x, "adj_level")),"\n\n")

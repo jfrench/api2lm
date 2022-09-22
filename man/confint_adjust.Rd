@@ -17,9 +17,8 @@ confint_adjust(object, parm, level = 0.95, method = "none")
 
 \item{method}{A character string indicating the type of
 adjustment to make. The default choice is
-\code{"none"}. The other available options are
-\code{"bonferroni"} and \code{"wh"}
-(Working-Hotelling).}
+\code{"none"}. The other option is
+\code{"bonferroni"}.}
 }
 \value{
 A \code{confint_adjust} object, which is simply a
@@ -49,12 +48,6 @@ standard t-based confidence intervals with multiplier
 intervals that use the multiplier \code{m = qt(1 - a/(2 *
 k), df = object$df.residual)}, where \code{k} is the
 number of intervals being produced.
-
-\code{method = "wh"} produces Working-Hotelling-adjusted
-intervals that are valid for all linear combinations of
-the regression coefficients, which uses the multiplier
-\code{m = sqrt(p * qf(level, df1 = p, df2 =
-object$df.residual))}.
 }
 \examples{
 ## an extension of the documentation for confint.lm
@@ -62,21 +55,21 @@ fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
 # standard intervals
 confint_adjust(fit)
 # bonferroni-adjusted intervals
-confint_adjust(fit, method = "b")
-# working-hotelling adjusted intervals
-confint_adjust(fit, method = "wh")
+(cib <- confint_adjust(fit, method = "b"))
+# plot results
+plot(cib)
+plot(cib, parm = c("hp", "disp"))
+if (require(ggplot2)) {
+  autoplot(cib)
+  autoplot(cib, parm = c("hp", "disp"))
+}
 }
 \references{
 Bonferroni, C. (1936). Teoria statistica
   delle classi e calcolo delle probabilita. Pubblicazioni
   del R Istituto Superiore di Scienze Economiche e
 Commericiali di Firenze, 8, 3-62.
-
-Working, H., & Hotelling, H. (1929). Applications of the
-theory of error to the interpretation of trends. Journal
-of the American Statistical Association, 24(165A), 73-85.
-doi:10.1080/01621459.1929.10506274
 }
 \seealso{
-\code{\link[stats]{confint.lm}}, \code{\link[api2lm]{confint_adjust}}
+\code{\link[stats]{confint.lm}}
 }
