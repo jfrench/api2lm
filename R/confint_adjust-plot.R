@@ -1,19 +1,28 @@
 #' Plot \code{confint_adjust} x
 #'
 #' Plot a \code{confint_adjust} x produced by the
-#' \code{\link[api2lm]{confint_adjust}} function. See Examples.
+#' \code{\link[api2lm]{confint_adjust}} function. See
+#' Examples.
 #'
-#' The \code{plot} function doesn't automatically adjust
-#' the margins to account for the label names. If you need
-#' more space for your labels, then increase the second
-#' element of \code{mar} from 7.1 upward and line from 6 upward.
-#' Alternatively, if you need less space, then you can decrease
-#' both of these values. Or you could use the \code{autoplot}
-#' function that automatically controls the spacing.
+#' The \code{plot} function doesn't automatically adjust the
+#' margins to account for the label names. If you need more
+#' space for your labels, then increase the second element
+#' of \code{mar} from 7.1 upward and line upward.
+#' Alternatively, if you need less space, then you can
+#' decrease both of these values. Or you could use the
+#' \code{autoplot} function that automatically controls the
+#' spacing.
 #'
 #' @param x An \code{confint_adjust} x produced by the
 #'   \code{\link[api2lm]{confint_adjust}} function.
 #' @inheritParams stats::confint
+#' @param mar A numerical vector of the form c(bottom, left,
+#'   top, right) which gives the number of lines of margin
+#'   to be specified on the four sides of the plot. The
+#'   default is c(5, 7, 4, 2) + 0.1.
+#' @param line The MARgin line, starting at 0 counting
+#'   outwards, to draw the y-axis label. The default is 1
+#'   unit less than \code{mar[2]}.
 #' @param ... Additional arguments passed to \code{plot}.
 #' @return NULL
 #' @author Joshua P. French
@@ -26,11 +35,11 @@
 #' # plot subset of intervals
 #' plot(cia, parm = c("hp", "disp"))
 #' # adjust margin and line for better formatting
-#' plot(cia, parm = 2:3, mar = c(5.1, 6.1, 4.1, 2.1), line = 4)
+#' plot(cia, parm = 2:3, mar = c(5.1, 4.1, 4.1, 2.1))
 plot.confint_adjust = function(x,
                                parm,
                                mar = c(5.1, 7.1, 4.1, 2.1),
-                               line = 6,
+                               line = mar[2] - 1,
                                ...) {
   arglist <- list(...)
   ylab <- arglist$ylab
