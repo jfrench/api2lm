@@ -256,9 +256,11 @@ predict_adjust <- function (object, newdata, se.fit = FALSE, scale = NULL,
       tfrac <- stats::qt((1 - level)/2, df)
     } else if (method == "bonferroni") {
       tfrac <- stats::qt((1 - level)/2/k, df)
-    } else if (method == "scheffe" & interval == "prediction") {
+    } else if (any(is.element(method, c("wh", "scheffe"))) &
+                   interval == "prediction") {
       tfrac <- -sqrt(k * stats::qf(level, df1 = k, df2 = df))
-    } else if (any(is.element(method, c("wh", "scheffe"))) & interval == "confidence") {
+    } else if (any(is.element(method, c("wh", "scheffe"))) &
+               interval == "confidence") {
       tfrac <- -sqrt(p * stats::qf(level, df1 = p, df2 = df))
     }
 
