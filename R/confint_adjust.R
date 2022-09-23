@@ -21,6 +21,12 @@
 #' k), df = object$df.residual)}, where \code{k} is the
 #' number of intervals being produced.
 #'
+#' \code{method = "wh"} produces Working-Hotelling-adjusted
+#' intervals that are valid for all linear combinations of
+#' the regression coefficients, which uses the multiplier
+#' \code{m = sqrt(p * qf(level, df1 = p, df2 =
+#' object$df.residual))}.
+#'
 #' @inheritParams stats::confint.lm
 #' @param method A character string indicating the type of
 #'   adjustment to make. The default choice is
@@ -38,6 +44,15 @@
 #'   delle classi e calcolo delle probabilita. Pubblicazioni
 #'   del R Istituto Superiore di Scienze Economiche e
 #' Commericiali di Firenze, 8, 3-62.
+#'
+#' Working, H., & Hotelling, H. (1929). Applications of the
+#' theory of error to the interpretation of trends. Journal
+#' of the American Statistical Association, 24(165A), 73-85.
+#' doi:10.1080/01621459.1929.10506274
+#'
+#' Kutner, M. H., Nachtsheim, C. J., Neter, J., & Li, W.
+#' (2004). Applied Linear Statistical Models, 5th edition.
+#' New York: McGraw-Hill/Irwin. (p. 230)
 #' @examples
 #' ## an extension of the documentation for confint.lm
 #' fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
@@ -52,9 +67,11 @@
 #'   autoplot(cib)
 #'   autoplot(cib, parm = c("hp", "disp"))
 #' }
+#' #' working-hotelling-adjusted intervals
+#' (ciwh <- confint_adjust(fit, method = "wh"))
 confint_adjust <- function(object, parm, level = 0.95, method = "none") {
   # match method
-  method <- match.arg(method, c("none", "bonferroni"))
+  method <- match.arg(method, c("none", "bonferroni", "wh"))
   # estimated coefficients
   cf <- stats::coef(object)
   # estimated standard errors
@@ -79,6 +96,9 @@ confint_adjust <- function(object, parm, level = 0.95, method = "none") {
     adj_level = max(1 - k * (1 - level), 0)
   } else if (method == "bonferroni") {
     fac <- stats::qt(c(a/k, 1 - a/k), object$df.residual)
+    adj_level = level
+  } else if (method == "wh") {
+    fac <- c(-1, 1) * sqrt(p * stats::qf(level, df1 = p, df2 = object$df.residual))
     adj_level = level
   }
 

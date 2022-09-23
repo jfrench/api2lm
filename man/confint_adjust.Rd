@@ -48,6 +48,12 @@ standard t-based confidence intervals with multiplier
 intervals that use the multiplier \code{m = qt(1 - a/(2 *
 k), df = object$df.residual)}, where \code{k} is the
 number of intervals being produced.
+
+\code{method = "wh"} produces Working-Hotelling-adjusted
+intervals that are valid for all linear combinations of
+the regression coefficients, which uses the multiplier
+\code{m = sqrt(p * qf(level, df1 = p, df2 =
+object$df.residual))}.
 }
 \examples{
 ## an extension of the documentation for confint.lm
@@ -63,12 +69,23 @@ if (require(ggplot2)) {
   autoplot(cib)
   autoplot(cib, parm = c("hp", "disp"))
 }
+#' working-hotelling-adjusted intervals
+(ciwh <- confint_adjust(fit, method = "wh"))
 }
 \references{
 Bonferroni, C. (1936). Teoria statistica
   delle classi e calcolo delle probabilita. Pubblicazioni
   del R Istituto Superiore di Scienze Economiche e
 Commericiali di Firenze, 8, 3-62.
+
+Working, H., & Hotelling, H. (1929). Applications of the
+theory of error to the interpretation of trends. Journal
+of the American Statistical Association, 24(165A), 73-85.
+doi:10.1080/01621459.1929.10506274
+
+Kutner, M. H., Nachtsheim, C. J., Neter, J., & Li, W.
+(2004). Applied Linear Statistical Models, 5th edition.
+New York: McGraw-Hill/Irwin. (p. 230)
 }
 \seealso{
 \code{\link[stats]{confint.lm}}
