@@ -15,6 +15,7 @@
 #' @param ... Not used
 #' @return NULL
 #' @author Joshua French
+#' @return None.
 #' @export
 #' @examples
 #' fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)

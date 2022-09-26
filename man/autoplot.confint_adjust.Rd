@@ -16,6 +16,9 @@ autoplot.confint_adjust(object, parm, ...)
 
 \item{...}{Not used}
 }
+\value{
+None.
+}
 \description{
 Plot a \code{confint_adjust} object produced by the
 \code{\link[api2lm]{confint_adjust}} function. The plotting

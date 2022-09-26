@@ -11,6 +11,25 @@
 #' @return NULL
 #' @author Joshua French
 #' @export
+#' @return Depending on the \code{interval} argument of
+#' \code{\link[api2lm]{predict_adjust}}:
+#'
+#' A vector of predictions if \code{interval = "none"}.
+#'
+#' A matrix of predictions and bounds with column names
+#' \code{fit}, \code{lwr}, and \code{upr} if
+#' \code{interval} is set. For \code{type = "terms"} this
+#' is a matrix with a column per term and may have an
+#' attribute \code{"constant"}.
+#'
+#' If \code{se.fit} is \code{TRUE}, a
+#' list with the following components is returned:
+#' \itemize{
+#'  \item{\code{fit}}{: vector or matrix as above}
+#'  \item{\code{se.fit}}{: standard error of predicted means}
+#'  \item{\code{residual.scale}}{: residual standard deviations}
+#'  \item{\code{df}}{: degrees of freedom for residual}
+#' }
 #' @examples
 #' fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
 #' (cia <- predict_adjust(fit))

@@ -10,6 +10,11 @@
 #'   \code{digits}.
 #' @return NULL
 #' @author Joshua French
+#' @return A \code{data.frame} with columns \code{term},
+#'   \code{lwr}, and \code{upr}, which are the coefficients
+#'   for which inference is being made, and the lower and
+#'   upper bounds of the confidence intervals for each
+#'   coefficient, respectively.
 #' @export
 #' @examples
 #' fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)

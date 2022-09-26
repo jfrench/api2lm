@@ -14,6 +14,13 @@
 \code{\link[base]{print.data.frame}} function, such as
 \code{digits}.}
 }
+\value{
+A \code{data.frame} with columns \code{term},
+  \code{lwr}, and \code{upr}, which are the coefficients
+  for which inference is being made, and the lower and
+  upper bounds of the confidence intervals for each
+  coefficient, respectively.
+}
 \description{
 Print an object of class \code{confint_adjust} produced
 by the \code{\link[api2lm]{confint_adjust}} function.

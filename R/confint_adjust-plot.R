@@ -24,7 +24,7 @@
 #'   outwards, to draw the y-axis label. The default is 1
 #'   unit less than \code{mar[2]}.
 #' @param ... Additional arguments passed to \code{plot}.
-#' @return NULL
+#' @return None.
 #' @author Joshua P. French
 #' @export
 #' @examples
@@ -74,5 +74,5 @@ plot.confint_adjust = function(x,
   graphics::points(number ~ estimate, data = x)
   graphics::abline(v = 0, lty = 4)
   # reset margin
-  graphics::par(mar = cmar)
+  base::on.exit(graphics::par(mar = cmar))
 }

@@ -25,6 +25,9 @@ unit less than \code{mar[2]}.}
 
 \item{...}{Additional arguments passed to \code{plot}.}
 }
+\value{
+None.
+}
 \description{
 Plot a \code{confint_adjust} x produced by the
 \code{\link[api2lm]{confint_adjust}} function. See

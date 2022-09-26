@@ -5,15 +5,23 @@
 \title{Print an object of class \code{coef_matrix} produced
 by the \code{\link[api2lm]{coef_matrix}} function.}
 \usage{
-\method{print}{coef_matrix}(x, ...)
+\method{print}{coef_matrix}(x, digits = 2, ...)
 }
 \arguments{
 \item{x}{An \code{coef_matrix} object produced by the
 \code{\link[api2lm]{coef_matrix}} function.}
 
+\item{digits}{the minimum number of significant digits to be used: see
+    \code{\link[base]{print.default}}.}
+
 \item{...}{Additional arguments to the
 \code{\link[base]{print.data.frame}} function, such as
 \code{digits}.}
+}
+\value{
+A \eqn{p \times 4} matrix with columns for the
+  estimated coefficient, its standard error, t-statistic
+  and corresponding (two-sided) p-value.
 }
 \description{
 Print an object of class \code{coef_matrix} produced
@@ -22,7 +30,8 @@ by the \code{\link[api2lm]{coef_matrix}} function.
 \examples{
 fit <- lm(100/mpg ~ disp + hp + wt + am, data = mtcars)
 (coefm <- coef_matrix(fit))
-print(coefm, digits = 3)
+# print more digits
+print(coefm, digits = 8)
 }
 \author{
 Joshua French
