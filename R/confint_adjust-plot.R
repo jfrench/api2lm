@@ -63,16 +63,25 @@ plot.confint_adjust = function(x,
   # setup plot
   term <- range(x$number)
   estimate <- c(xmin, xmax)
+  # extract current margins
   cmar <- graphics::par()$mar
+  # reset margin on exit
+  base::on.exit(graphics::par(mar = cmar))
+  # set new margins for plotting
   graphics::par(mar = mar)
-  plot(term ~ estimate, yaxt = "n", type = "n", ylab = "")#, ...)
+  # create blank plot
+  plot(term ~ estimate, yaxt = "n", type = "n",
+       ylab = "", ...)
+  # add axis tick labels
   graphics::axis(2, at = x$number, labels = x$term, las = 1)
+  # add y-axis labels
   graphics::mtext(ylab, side = 2, line = line)
+  # include segments for confidence intervals
   graphics::segments(
     x0 = x$lwr, y0 = x$number,
     x1 = x$upr, y1 = x$number)
+  # add center of interval
   graphics::points(number ~ estimate, data = x)
+  # vertical line at 0
   graphics::abline(v = 0, lty = 4)
-  # reset margin
-  base::on.exit(graphics::par(mar = cmar))
 }
