@@ -51,8 +51,8 @@ rplot_raw(
 \item{extendrange_f}{Positive number(s) specifying the
 fraction by which the range of the residuals should be
 extended using the \code{\link[grDevices]{extendrange}}
-function. If longer than one, `f[1]` is used on the
-left and `f[2]` on the right.}
+function. If longer than one, \code{f[1]} is used on
+the left and \code{f[2]} on the right.}
 }
 \description{
 Helper function for residuals_plot.lm

@@ -2,11 +2,12 @@
 % Please edit documentation in R/residual_plot.lm.R
 \name{residual_plot.lm}
 \alias{residual_plot.lm}
-\title{Plot residuals of a fitted `lm` object}
+\title{Plot residuals of a fitted \code{lm} object}
 \usage{
 \method{residual_plot}{lm}(
   model,
-  type = "ordinary",
+  type = c("ordinary", "standardized", "studentized", "loo", "jackknife", "deleted",
+    "internally studentized", "externally studentized"),
   xaxis = "fitted",
   id_n = 3,
   predictors = ~.,
@@ -26,31 +27,35 @@
 \code{\link[stats]{lm}} function.}
 
 \item{type}{The residual type to plot. The default is
-`"ordinary"`. The other options are `"standardized"`,
-`"studentized"`, `"loo"`, `"jackknife"`, `"deleted"`,
-`"internally studentized"`, `"externally studentized"`.}
+\code{"ordinary"}. The other options are
+\code{"standardized"}, \code{"studentized"},
+\code{"loo"}, \code{"jackknife"}, \code{"deleted"},
+\code{"internally studentized"}, \code{"externally
+studentized"}.}
 
 \item{xaxis}{The variable to use on the x-axis of the
-plot(s). The default is `fitted` to use fitted values.
-The other options are `"index"` and `"predictors"`.}
+plot(s). The default is \code{"fitted"} to use fitted
+values. The other option is \code{"predictors"}.}
 
 \item{id_n}{The number of points to identify with labels.
-The default is `3`.}
+The default is \code{3}.}
 
 \item{predictors}{A formula describing the first-order
 predictors to plot the residuals against. The default
 is all available first-order predictors.}
 
-\item{smooth}{A function with a \code{\link[stats]{formula}}
-argument to smooth the desired plot. The
-default function is \code{\link[stats]{loess}.}}
+\item{smooth}{A function with a
+\code{\link[stats]{formula}} argument to smooth the
+desired plot. The default function is
+\code{\link[stats]{loess}.}}
 
 \item{add_reference}{A logical value indicating whether a
-reference line should be added. The default is `TRUE`.}
+reference line should be added. The default is
+\code{TRUE}.}
 
 \item{add_smooth}{A logical value indicating whether a
 smooth should be added to each plot produced. The
-default is `TRUE`.}
+default is \code{TRUE}.}
 
 \item{...}{Additional arguments passed to the
 \code{\link[graphics]{plot}} function.}
@@ -66,27 +71,29 @@ plot.}
 
 \item{smooth_arglist}{A named list specifying additional
 arguments passed to the function provided in the
-`smooth` argument.}
+\code{smooth} argument.}
 
 \item{lines_arglist}{A named list specifying additional
 arguments passed to the \code{\link[graphics]{lines}}
-function for plotting the result of applying the `smooth`
-function.}
+function for plotting the result of applying the
+\code{smooth} function.}
 
 \item{extendrange_f}{Positive number(s) specifying the
 fraction by which the range of the residuals should be
 extended using the \code{\link[grDevices]{extendrange}}
-function. If longer than one, `f[1]` is used on the
-left and `f[2]` on the right.}
+function. If longer than one, \code{f[1]} is used on
+the left and \code{f[2]} on the right.}
 }
 \description{
-`residual_plot.lm` plots the residuals of a fitted `lm`
-object. In general, it is intended to provide similar
-functionality to \code{\link[stats]{plot.lm}}` when
-`which = 1`, but can be used for different types of
-residuals and can also plot first-order predictor
-variables along the x-axis instead of only the fitted
-values.
+\code{residual_plot.lm} plots the residuals of a fitted
+\code{lm} object. In general, it is intended to provide
+similar functionality to \code{\link[stats]{plot.lm}}
+when \code{which = 1}, but can be used for different
+types of residuals and can also plot first-order
+predictor variables along the x-axis instead of only the
+fitted values.\cr\cr Details about the different types of
+residuals are discussed in the
+\code{\link[api2lm]{get_residuals}} function.
 }
 \examples{
 lmod <- lm(Petal.Length ~ Sepal.Length + Species,
@@ -96,6 +103,13 @@ residual_plot(lmod)
 plot(lmod, which = 1)
 # residual plot for other residual types
 residual_plot(lmod, type = "standardized", id_n = 0)
+# another residual plot with several customizations
+residual_plot(lmod,
+              text_arglist = list(col = "blue", cex = 2),
+              abline_arglist = list(lwd = 2, lty = 2,
+                                    col = "brown"),
+              lines_arglist = list(col = "purple"),
+              )
 # residual plot for predictors
 residual_plot(lmod, xaxis = "pred", id_n = 2)
 # residual plot for individual predictors
@@ -107,7 +121,8 @@ residual_plot(lmod, xaxis = "pred",
 \seealso{
 \code{\link[graphics]{plot}},
   \code{\link[graphics]{text}},
-  \code{\link[graphics]{text}},
+  \code{\link[graphics]{abline}},
+  \code{\link[graphics]{lines}}
   \code{\link[stats]{loess}}.
 }
 \author{

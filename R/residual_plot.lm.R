@@ -1,35 +1,42 @@
-#' Plot residuals of a fitted `lm` object
+#' Plot residuals of a fitted \code{lm} object
 #'
-#' `residual_plot.lm` plots the residuals of a fitted `lm`
-#' object. In general, it is intended to provide similar
-#' functionality to \code{\link[stats]{plot.lm}}` when
-#' `which = 1`, but can be used for different types of
-#' residuals and can also plot first-order predictor
-#' variables along the x-axis instead of only the fitted
-#' values.
+#' \code{residual_plot.lm} plots the residuals of a fitted
+#' \code{lm} object. In general, it is intended to provide
+#' similar functionality to \code{\link[stats]{plot.lm}}
+#' when \code{which = 1}, but can be used for different
+#' types of residuals and can also plot first-order
+#' predictor variables along the x-axis instead of only the
+#' fitted values.\cr\cr Details about the different types of
+#' residuals are discussed in the
+#' \code{\link[api2lm]{get_residuals}} function.
+#'
 #'
 #' @param model A fitted model object from the
 #'   \code{\link[stats]{lm}} function.
 #' @param type The residual type to plot. The default is
-#'   `"ordinary"`. The other options are `"standardized"`,
-#'   `"studentized"`, `"loo"`, `"jackknife"`, `"deleted"`,
-#'   `"internally studentized"`, `"externally studentized"`.
+#'   \code{"ordinary"}. The other options are
+#'   \code{"standardized"}, \code{"studentized"},
+#'   \code{"loo"}, \code{"jackknife"}, \code{"deleted"},
+#'   \code{"internally studentized"}, \code{"externally
+#'   studentized"}.
 #' @param xaxis The variable to use on the x-axis of the
-#'   plot(s). The default is `fitted` to use fitted values.
-#'   The other options are `"index"` and `"predictors"`.
+#'   plot(s). The default is \code{"fitted"} to use fitted
+#'   values. The other option is \code{"predictors"}.
 #' @param id_n The number of points to identify with labels.
-#'   The default is `3`.
+#'   The default is \code{3}.
 #' @param add_reference A logical value indicating whether a
-#'   reference line should be added. The default is `TRUE`.
+#'   reference line should be added. The default is
+#'   \code{TRUE}.
 #' @param add_smooth A logical value indicating whether a
 #'   smooth should be added to each plot produced. The
-#'   default is `TRUE`.
+#'   default is \code{TRUE}.
 #' @param predictors A formula describing the first-order
 #'   predictors to plot the residuals against. The default
 #'   is all available first-order predictors.
-#' @param smooth A function with a \code{\link[stats]{formula}}
-#'   argument to smooth the desired plot. The
-#'   default function is \code{\link[stats]{loess}.}
+#' @param smooth A function with a
+#'   \code{\link[stats]{formula}} argument to smooth the
+#'   desired plot. The default function is
+#'   \code{\link[stats]{loess}.}
 #' @param ... Additional arguments passed to the
 #'   \code{\link[graphics]{plot}} function.
 #' @param text_arglist Additional arguments passed to the
@@ -41,20 +48,21 @@
 #'   plot.
 #' @param smooth_arglist A named list specifying additional
 #'   arguments passed to the function provided in the
-#'   `smooth` argument.
+#'   \code{smooth} argument.
 #' @param lines_arglist A named list specifying additional
-#' arguments passed to the \code{\link[graphics]{lines}}
-#' function for plotting the result of applying the `smooth`
-#' function.
+#'   arguments passed to the \code{\link[graphics]{lines}}
+#'   function for plotting the result of applying the
+#'   \code{smooth} function.
 #' @param extendrange_f Positive number(s) specifying the
 #'   fraction by which the range of the residuals should be
 #'   extended using the \code{\link[grDevices]{extendrange}}
-#'   function. If longer than one, `f[1]` is used on the
-#'   left and `f[2]` on the right.
+#'   function. If longer than one, \code{f[1]} is used on
+#'   the left and \code{f[2]} on the right.
 #' @author Joshua French
 #' @seealso \code{\link[graphics]{plot}},
 #'   \code{\link[graphics]{text}},
-#'   \code{\link[graphics]{text}},
+#'   \code{\link[graphics]{abline}},
+#'   \code{\link[graphics]{lines}}
 #'   \code{\link[stats]{loess}}.
 #' @export
 #' @examples
@@ -65,6 +73,13 @@
 #' plot(lmod, which = 1)
 #' # residual plot for other residual types
 #' residual_plot(lmod, type = "standardized", id_n = 0)
+#' # another residual plot with several customizations
+#' residual_plot(lmod,
+#'               text_arglist = list(col = "blue", cex = 2),
+#'               abline_arglist = list(lwd = 2, lty = 2,
+#'                                     col = "brown"),
+#'               lines_arglist = list(col = "purple"),
+#'               )
 #' # residual plot for predictors
 #' residual_plot(lmod, xaxis = "pred", id_n = 2)
 #' # residual plot for individual predictors
@@ -73,7 +88,16 @@
 #' residual_plot(lmod, xaxis = "pred",
 #'               predictors = ~ Species,)
 residual_plot.lm <-
-  function(model, type = "ordinary", xaxis = "fitted",
+  function(model,
+           type = c("ordinary",
+                    "standardized",
+                    "studentized",
+                    "loo",
+                    "jackknife",
+                    "deleted",
+                    "internally studentized",
+                    "externally studentized"),
+           xaxis = "fitted",
            id_n = 3, predictors = ~ .,
            smooth = stats::loess,
            add_reference = TRUE,
@@ -85,20 +109,20 @@ residual_plot.lm <-
            lines_arglist = list(),
            extendrange_f = 0.08) {
   arglist <- list(...)
+  type <- match.arg(type, c("ordinary",
+                            "standardized",
+                            "studentized",
+                            "loo",
+                            "jackknife",
+                            "deleted",
+                            "internally studentized",
+                            "externally studentized"))
   arg_check_residual_plot_lm(type, xaxis, id_n, smooth,
                              add_reference, add_smooth,
                              text_arglist, abline_arglist,
                              smooth_arglist, lines_arglist,
                              extendrange_f)
 
-  type <- match.arg(type, c("ordinary",
-                          "standardized",
-                          "studentized",
-                          "loo",
-                          "jackknife",
-                          "deleted",
-                          "internally studentized",
-                          "externally studentized"))
   if(is.null(arglist$ylab)) {
     arglist$ylab <- paste(type, "residuals")
   }

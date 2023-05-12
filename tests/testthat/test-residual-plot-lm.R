@@ -22,5 +22,14 @@ test_that("residual_plot.lm produces correct results", {
                   predictors = ~ Species, id_n = 2)
   }
   expect_doppelganger("residual_plot Species", p)
+  p <- function() {
+    residual_plot(lmod,
+                  text_arglist = list(col = "blue", cex = 2),
+                  abline_arglist = list(lwd = 2, lty = 2,
+                                        col = "brown"),
+                  lines_arglist = list(col = "purple"),
+                  )
+  }
+  expect_doppelganger("residual_plot custom", p)
 })
 }
