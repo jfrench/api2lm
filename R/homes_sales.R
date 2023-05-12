@@ -1,0 +1,33 @@
+#' Home sale prices in King County, WA
+#'
+#' The `home_sales` data set is a data frame consisting of
+#' 216 rows and 8 columns. The data are a subset of home
+#' sales in King County, WA made between 2014-05-02 to
+#' 2015-05-27. The variables in the data set are:
+#' - `price`: sale price (in log10 US dollars).
+#' - `bedrooms`: number of bedrooms.
+#' - `bathrooms`: number of bathrooms.
+#' - `sqft_living`: size of living space in square feet.
+#' - `sqft_lot`: lot size in square feet.
+#' - `floors`: number of floors in home.
+#' - `waterfront`: a `factor` variable with levels `no` and `yes`
+#' that indicate whether the home has a waterfront view.
+#' - `condition`: a `factor` variable indicating the condition of the house with levels
+#' ranging from `poor` to `very good`.
+#'
+#' @name home_sales
+#' @docType data
+#' @return A `data.frame`.
+#' @keywords datasets
+#' @source The Center for Spatial Data Science, University
+#' of Chicago.
+#' \url{https://geodacenter.github.io/data-and-lab//KingCounty-HouseSales2015/}
+#'
+#' These data were created by selectively choosing a subset
+#' of observations from the `home_prices` data set in the
+#' **KingCountyHomes** package.
+#'
+#' @examples
+#' data(home_sales)
+#' summary(home_sales)
+NULL

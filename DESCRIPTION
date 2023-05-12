@@ -1,16 +1,16 @@
 Package: api2lm
 Type: Package
 Title: Functions and Data Sets for the Book "A Progressive Introduction to Linear Models"
-Version: 0.1.4
+Version: 0.2
 Author: Joshua P. French
 Maintainer: Joshua P. French <joshua.french@ucdenver.edu>
 Description: Simplifies aspects of linear regression analysis, particularly simultaneous inference. Additionally, supports "A Progressive Introduction to Linear Models" by Joshua French (<https://jfrench.github.io/LinearRegression/>).
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Suggests: 
-    testthat (>= 3.0.0), ggplot2, knitr
+    testthat (>= 3.0.0), ggplot2, knitr, vdiffr
 VignetteBuilder: knitr
 Depends:
     R (>= 3.5.0)
