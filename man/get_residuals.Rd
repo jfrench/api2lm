@@ -64,7 +64,7 @@ computed as
 The LOO residual is also known as the deleted or jackknife
 residual.
 
-The studentized residual for the \code{ith} observation
+The studentized residual for the \eqn{i}th observation
 is computed as
 
 \deqn{t_i = \frac{l_i}{\hat{\sigma}_{(i)}\sqrt{1-h_i}},}
