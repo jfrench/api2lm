@@ -4,7 +4,7 @@ test_that("sl_plot.lm produces correct results", {
              data = iris)
   p <- function() sl_plot(lmod)
   expect_doppelganger("default sl_plot", p)
-  p <- function() sl_plot(lmod, type = "studentized")
+  p <- function() sl_plot(lmod, rtype = "studentized")
   expect_doppelganger("studentized sl_plot", p)
   p <- function() sl_plot(lmod, xaxis = "pred", id_n = 2)
   expect_doppelganger("sl_plot all pres", p)

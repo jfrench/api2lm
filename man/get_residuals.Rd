@@ -6,14 +6,14 @@
 \usage{
 get_residuals(
   x,
-  type = c("ordinary", "standardized", "studentized", "jackknife", "loo", "deleted",
+  rtype = c("ordinary", "standardized", "studentized", "jackknife", "loo", "deleted",
     "internally studentized", "externally studentized")
 )
 }
 \arguments{
 \item{x}{An \code{lm} object}
 
-\item{type}{The desired residual type. The options are
+\item{rtype}{The desired residual type. The options are
 \code{"ordinary"}, \code{"standardized"}, \code{"studentized"},
 \code{"jackknife"}, \code{"loo"}, \code{"deleted"}, \code{"internally
 studentized"}, and \code{"externally studentized"}.}

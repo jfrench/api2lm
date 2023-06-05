@@ -6,7 +6,7 @@
 \usage{
 \method{residual_plot}{lm}(
   model,
-  type = c("ordinary", "standardized", "studentized", "loo", "jackknife", "deleted",
+  rtype = c("ordinary", "standardized", "studentized", "loo", "jackknife", "deleted",
     "internally studentized", "externally studentized"),
   xaxis = "fitted",
   id_n = 3,
@@ -26,7 +26,7 @@
 \item{model}{A fitted model object from the
 \code{\link[stats]{lm}} function.}
 
-\item{type}{The residual type to plot. The default is
+\item{rtype}{The residual type to plot. The default is
 \code{"ordinary"}. The other options are
 \code{"standardized"}, \code{"studentized"},
 \code{"loo"}, \code{"jackknife"}, \code{"deleted"},
@@ -102,7 +102,7 @@ lmod <- lm(Petal.Length ~ Sepal.Length + Species,
 residual_plot(lmod)
 plot(lmod, which = 1)
 # residual plot for other residual types
-residual_plot(lmod, type = "standardized", id_n = 0)
+residual_plot(lmod, rtype = "standardized", id_n = 0)
 # another residual plot with several customizations
 residual_plot(lmod,
               text_arglist = list(col = "blue", cex = 2),

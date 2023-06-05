@@ -15,7 +15,9 @@ set_abline_arglist <- function(abline_arglist) {
   if (is.null(abline_arglist$col)) {
     abline_arglist$col <- "grey"
   }
-  abline_arglist$h <- 0
+  if (is.null(abline_arglist$h)) {
+    abline_arglist$h <- 0
+  }
   return(abline_arglist)
 }
 
@@ -216,11 +218,11 @@ rplot_raw <- function(x, y,
 #' @keywords internal
 #' @return NULL
 arg_check_residual_plot_lm <-
-  function(type, xaxis, id_n, smooth, add_reference,
+  function(rtype, xaxis, id_n, smooth, add_reference,
            add_smooth, text_arglist, abline_arglist,
            smooth_arglist, lines_arglist, extendrange_f) {
-  if (length(type) != 1) {
-    stop("type must have length 1")
+  if (length(rtype) != 1) {
+    stop("rtype must have length 1")
   }
   if (length(xaxis) != 1) {
     stop("xaxis must have length 1")

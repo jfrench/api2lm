@@ -5,7 +5,7 @@
 \title{Check arguments of residual_plot.lm}
 \usage{
 arg_check_residual_plot_lm(
-  type,
+  rtype,
   xaxis,
   id_n,
   smooth,
@@ -19,7 +19,7 @@ arg_check_residual_plot_lm(
 )
 }
 \arguments{
-\item{type}{The residual type to plot. The default is
+\item{rtype}{The residual type to plot. The default is
 \code{"ordinary"}. The other options are
 \code{"standardized"}, \code{"studentized"},
 \code{"loo"}, \code{"jackknife"}, \code{"deleted"},

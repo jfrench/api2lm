@@ -6,7 +6,7 @@
 \usage{
 \method{sl_plot}{lm}(
   model,
-  type = c("standardized", "studentized", "internally studentized",
+  rtype = c("standardized", "studentized", "internally studentized",
     "externally studentized"),
   xaxis = "fitted",
   id_n = 3,
@@ -23,7 +23,7 @@
 \item{model}{A fitted model object from the
 \code{\link[stats]{lm}} function.}
 
-\item{type}{The residual type to plot. The default is
+\item{rtype}{The residual type to plot. The default is
 \code{"ordinary"}. The other options are
 \code{"standardized"}, \code{"studentized"},
 \code{"loo"}, \code{"jackknife"}, \code{"deleted"},
@@ -84,9 +84,9 @@ lmod <- lm(Petal.Length ~ Sepal.Length + Species,
 sl_plot(lmod)
 plot(lmod, which = 3)
 # spread-level plot for other residual types
-residual_plot(lmod, type = "studentized", id_n = 0)
+sl_plot(lmod, rtype = "studentized", id_n = 0)
 # spread-level plot for predictors
-residual_plot(lmod, xaxis = "pred", id_n = 2)
+sl_plot(lmod, xaxis = "pred", id_n = 2)
 # spread-level plot for individual predictors
 sl_plot(lmod, xaxis = "pred",
         predictors = ~ Sepal.Length,

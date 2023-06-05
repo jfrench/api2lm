@@ -12,7 +12,7 @@
 #'
 #' @param model A fitted model object from the
 #'   \code{\link[stats]{lm}} function.
-#' @param type The residual type to plot. The default is
+#' @param rtype The residual type to plot. The default is
 #'   \code{"ordinary"}. The other options are
 #'   \code{"standardized"}, \code{"studentized"},
 #'   \code{"loo"}, \code{"jackknife"}, \code{"deleted"},
@@ -58,19 +58,19 @@
 #' sl_plot(lmod)
 #' plot(lmod, which = 3)
 #' # spread-level plot for other residual types
-#' residual_plot(lmod, type = "studentized", id_n = 0)
+#' sl_plot(lmod, rtype = "studentized", id_n = 0)
 #' # spread-level plot for predictors
-#' residual_plot(lmod, xaxis = "pred", id_n = 2)
+#' sl_plot(lmod, xaxis = "pred", id_n = 2)
 #' # spread-level plot for individual predictors
 #' sl_plot(lmod, xaxis = "pred",
 #'         predictors = ~ Sepal.Length,
 #'         id_n = 2)
 sl_plot.lm <-
   function(model,
-           type = c("standardized",
-                    "studentized",
-                    "internally studentized",
-                    "externally studentized"),
+           rtype = c("standardized",
+                     "studentized",
+                     "internally studentized",
+                     "externally studentized"),
            xaxis = "fitted",
            id_n = 3, predictors = ~ .,
            smooth = stats::loess,
@@ -80,25 +80,19 @@ sl_plot.lm <-
            smooth_arglist = list(),
            lines_arglist = list()) {
   arglist <- list(...)
-  type <- match.arg(type, c("standardized",
-                            "studentized",
-                            "internally studentized",
-                            "externally studentized"))
+  rtype <- match.arg(rtype, c("standardized",
+                             "studentized",
+                             "internally studentized",
+                             "externally studentized"))
 
-  # set some arguments for rplot_raw
-  # that aren't needed for this plot
-  add_reference <- FALSE
-  abline_arglist = list()
-  extendrange_f = 0
-
-  arg_check_residual_plot_lm(type, xaxis, id_n, smooth,
-                             add_reference, add_smooth,
-                             text_arglist, abline_arglist,
+  arg_check_residual_plot_lm(rtype, xaxis, id_n, smooth,
+                             FALSE, add_smooth,
+                             text_arglist, list(),
                              smooth_arglist, lines_arglist,
-                             extendrange_f)
+                             extendrange_f = 0)
 
   if(is.null(arglist$ylab)) {
-    rtext <- paste(type, "residuals")
+    rtext <- paste(rtype, "residuals")
     # taken from plot.lm
     yl <- as.expression(substitute(sqrt(abs(YL)),
                                    list(YL = as.name(rtext))))
@@ -106,7 +100,7 @@ sl_plot.lm <-
   }
 
   # get desired residuals
-  r <- sqrt(abs(get_residuals(model, type)))
+  r <- sqrt(abs(get_residuals(model, rtype)))
   # determine id_n most extreme observations
   idd <- order(abs(r), decreasing = TRUE)[seq_len(id_n)]
 
@@ -121,15 +115,15 @@ sl_plot.lm <-
               labels = row.names(model$model),
               idd = idd,
               xlab = "fitted values",
-              add_reference = add_reference,
+              add_reference = FALSE,
               smooth = smooth,
               add_smooth = add_smooth,
               arglist = arglist,
               text_arglist = text_arglist,
-              abline_arglist = abline_arglist,
+              abline_arglist = list(),
               smooth_arglist = smooth_arglist,
               lines_arglist = lines_arglist,
-              extendrange_f = extendrange_f)
+              extendrange_f = 0)
   } else {
     # determine first-order variables in original model
     all_preds <- all.vars(stats::formula(model))[-1]
@@ -157,7 +151,7 @@ sl_plot.lm <-
                 labels = row.names(model$model),
                 xlab = xnames[j],
                 add_reference = ifelse(!is_factor,
-                                       add_reference,
+                                       FALSE,
                                        FALSE),
                 smooth = smooth,
                 add_smooth = ifelse(!is_factor,
@@ -165,10 +159,10 @@ sl_plot.lm <-
                                     FALSE),
                 arglist = arglist,
                 text_arglist = text_arglist,
-                abline_arglist = abline_arglist,
+                abline_arglist = list(),
                 smooth_arglist = smooth_arglist,
                 lines_arglist = lines_arglist,
-                extendrange_f = extendrange_f)
+                extendrange_f = 0)
     }
     # proper exit
     on.exit(graphics::par(curpar))

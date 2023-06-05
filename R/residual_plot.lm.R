@@ -10,10 +10,9 @@
 #' residuals are discussed in the
 #' \code{\link[api2lm]{get_residuals}} function.
 #'
-#'
 #' @param model A fitted model object from the
 #'   \code{\link[stats]{lm}} function.
-#' @param type The residual type to plot. The default is
+#' @param rtype The residual type to plot. The default is
 #'   \code{"ordinary"}. The other options are
 #'   \code{"standardized"}, \code{"studentized"},
 #'   \code{"loo"}, \code{"jackknife"}, \code{"deleted"},
@@ -72,7 +71,7 @@
 #' residual_plot(lmod)
 #' plot(lmod, which = 1)
 #' # residual plot for other residual types
-#' residual_plot(lmod, type = "standardized", id_n = 0)
+#' residual_plot(lmod, rtype = "standardized", id_n = 0)
 #' # another residual plot with several customizations
 #' residual_plot(lmod,
 #'               text_arglist = list(col = "blue", cex = 2),
@@ -89,14 +88,14 @@
 #'               predictors = ~ Species,)
 residual_plot.lm <-
   function(model,
-           type = c("ordinary",
-                    "standardized",
-                    "studentized",
-                    "loo",
-                    "jackknife",
-                    "deleted",
-                    "internally studentized",
-                    "externally studentized"),
+           rtype = c("ordinary",
+                     "standardized",
+                     "studentized",
+                     "loo",
+                     "jackknife",
+                     "deleted",
+                     "internally studentized",
+                     "externally studentized"),
            xaxis = "fitted",
            id_n = 3, predictors = ~ .,
            smooth = stats::loess,
@@ -109,26 +108,26 @@ residual_plot.lm <-
            lines_arglist = list(),
            extendrange_f = 0.08) {
   arglist <- list(...)
-  type <- match.arg(type, c("ordinary",
-                            "standardized",
-                            "studentized",
-                            "loo",
-                            "jackknife",
-                            "deleted",
-                            "internally studentized",
-                            "externally studentized"))
-  arg_check_residual_plot_lm(type, xaxis, id_n, smooth,
+  rtype <- match.arg(rtype, c("ordinary",
+                             "standardized",
+                             "studentized",
+                             "loo",
+                             "jackknife",
+                             "deleted",
+                             "internally studentized",
+                             "externally studentized"))
+  arg_check_residual_plot_lm(rtype, xaxis, id_n, smooth,
                              add_reference, add_smooth,
                              text_arglist, abline_arglist,
                              smooth_arglist, lines_arglist,
                              extendrange_f)
 
   if(is.null(arglist$ylab)) {
-    arglist$ylab <- paste(type, "residuals")
+    arglist$ylab <- paste(rtype, "residuals")
   }
 
   # get desired residuals
-  r <- get_residuals(model, type)
+  r <- get_residuals(model, rtype)
   # determine id_n most extreme observations
   idd <- order(abs(r), decreasing = TRUE)[seq_len(id_n)]
 

@@ -55,7 +55,7 @@
 
 #'
 #' @param x An \code{lm} object
-#' @param type The desired residual type. The options are
+#' @param rtype The desired residual type. The options are
 #'   \code{"ordinary"}, \code{"standardized"}, \code{"studentized"},
 #'   \code{"jackknife"}, \code{"loo"}, \code{"deleted"}, \code{"internally
 #'   studentized"}, and \code{"externally studentized"}.
@@ -78,7 +78,7 @@
 #' rl <- get_residuals(lmod, "loo")
 #' all.equal(rl, rloo(lmod))
 get_residuals <- function(x,
-                          type = c(
+                          rtype = c(
                             "ordinary",
                             "standardized",
                             "studentized",
@@ -91,13 +91,13 @@ get_residuals <- function(x,
   if (!is.element("lm", class(x))) {
     stop("x must be of class lm")
   }
-  type <- match.arg(type,
-                    c("ordinary", "standardized",
-                      "studentized", "jackknife",
-                      "loo", "deleted",
-                      "internally studentized",
-                      "externally studentized"))
-  switch(type,
+  rtype <- match.arg(rtype,
+                     c("ordinary", "standardized",
+                       "studentized", "jackknife",
+                       "loo", "deleted",
+                       "internally studentized",
+                       "externally studentized"))
+  switch(rtype,
          ordinary = stats::residuals(x),
          standardized = stats::rstandard(x),
          studentized = stats::rstudent(x),
