@@ -21,13 +21,13 @@ outlier_stats(model, n = 6L)
     contain at least one non-missing value.}
 }
 \value{
-A vector of statistics
+A vector of statistics.
 }
 \description{
 \code{outlier_stats} returns the ordered
 studentized residuals (decreasing based on magnitude) of
 \code{model} to
-identify the most unusual observations.
+Identify the most unusual observations.
 }
 \examples{
 lmod <- lm(price ~ sqft_living, data = home_sales)

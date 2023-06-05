@@ -3,11 +3,11 @@
 #' \code{outlier_stats} returns the ordered
 #' studentized residuals (decreasing based on magnitude) of
 #' \code{model} to
-#' identify the most unusual observations.
+#' Identify the most unusual observations.
 #' @inheritParams residual_plot.lm
 #' @inheritParams utils::head
 #'
-#' @return A vector of statistics
+#' @return A vector of statistics.
 #' @export
 #'
 #' @examples
