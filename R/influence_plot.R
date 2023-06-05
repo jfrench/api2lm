@@ -42,6 +42,8 @@
 #' @param id_n The number of points to identify with labels
 #'   with respect to largest absolute criterion. The default
 #'   is \code{3} labels.
+#' @param size A numeric vector of length 2 that provides
+#' guidelines for the size of the points.
 #' @param alpha The default quantile used for the horizontal
 #'   reference lines. The default is 0.05. See Details.
 #' @author Joshua French
@@ -114,7 +116,7 @@ influence_plot <-
   # add reference lines
   if (add_reference) {
     if (is.null(abline_arglist$h)) {
-      dfr <- df.residual(model)
+      dfr <- stats::df.residual(model)
       abline_arglist$h <-
         stats::qt(c(alpha/2, 1-alpha/2), df = dfr)
     }

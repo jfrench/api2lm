@@ -30,6 +30,9 @@ reference line should be added. The default is
 \item{alpha}{The default quantile used for the horizontal
 reference lines. The default is 0.05. See Details.}
 
+\item{size}{A numeric vector of length 2 that provides
+guidelines for the size of the points.}
+
 \item{text_arglist}{Additional arguments passed to the
 \code{\link[graphics]{text}} function, which is used to
 display the points that are identified.}
