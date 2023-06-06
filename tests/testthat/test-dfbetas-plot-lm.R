@@ -7,7 +7,7 @@ if (require("vdiffr")) {
     p <- function() dfbetas_plot(lmod, id_n = 6)
     expect_doppelganger("dfbetas_plot custom 1", p)
     p <- function() {
-      dfbetas_plot(lmod, regressors = "Sepal.Length")
+      dfbetas_plot(lmod, regressors = ~ Sepal.Length)
     }
     expect_doppelganger("cooks_plot 1 variable", p)
     p <- function() {

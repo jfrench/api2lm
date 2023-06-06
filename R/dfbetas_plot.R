@@ -7,9 +7,9 @@
 #' default if \code{add_reference} is \code{TRUE}.
 #'
 #' @inheritParams residual_plot.lm
-#' @param regressors A character vector with the \code{model}
-#'   regressors for
-#'   which to plot the \code{dfbetas} statistics.
+#' @param regressors A formula describing the regressors for
+#'   which to plot the \code{dfbetas} statistics. The
+#'   default is all available regressors.
 #' @author Joshua French
 #' @seealso \code{\link[graphics]{plot}},
 #'   \code{\link[graphics]{text}},
@@ -20,11 +20,11 @@
 #' lmod <- lm(Petal.Length ~ Sepal.Length + Species,
 #'            data = iris)
 #' dfbetas_plot(lmod)
-#' dfbetas_plot(lmod, regressors = "Sepal.Length", id_n = 4)
+#' dfbetas_plot(lmod, regressors = ~ Sepal.Length, id_n = 4)
 dfbetas_plot <-
   function(model,
            id_n = 3,
-           regressors = NULL,
+           regressors = ~ .,
            add_reference = TRUE,
            ...,
            text_arglist = list(),
@@ -35,18 +35,26 @@ dfbetas_plot <-
   # determine first-order variables in original model
   dfbetas_stats <- stats::dfbetas(model)
   dfbetas_names <- colnames(dfbetas_stats)
-  if (!is.null(regressors)) {
-    rcheck <- is.element(regressors, dfbetas_names)
-    if(any(!rcheck)) {
-      rbad <- paste(regressors[!rcheck], collapse = ", ")
-      stop(paste("The regressors provided do not match",
-                 "the regressor names produced by dfbetas.",
-                 "The problem appears to be", rbad))
 
-    }
-    dfbetas_names <- intersect(dfbetas_names, regressors)
+  regressor_names <-
+    labels(stats::terms(regressors,
+                        data = stats::model.matrix(model)))
+  # Correct inconsistency in (Intercept) name
+  if (any(is.element("`(Intercept)`", regressor_names))) {
+    wi <- which(regressor_names == "`(Intercept)`")
+    regressor_names[wi] <- "(Intercept)"
   }
-  dfbetas_stats <- dfbetas_stats[, dfbetas_names, drop = FALSE]
+  rcheck <- is.element(regressor_names, dfbetas_names)
+  if(any(!rcheck)) {
+    rbad <- paste(regressor_names[!rcheck], collapse = ", ")
+    stop(paste("The regressors provided do not match",
+               "the regressor names produced by dfbetas.",
+               "The problem appears to be", rbad))
+
+  }
+  dfbetas_names <- intersect(dfbetas_names, regressor_names)
+  dfbetas_stats <-
+    dfbetas_stats[, dfbetas_names, drop = FALSE]
 
   # save current par values
   curpar <- graphics::par(no.readonly = TRUE)
@@ -103,8 +111,8 @@ arg_check_dfbetas_plot <-
     if (length(id_n) != 1 | min(id_n) < 0) {
       stop("id_n must be a positive value")
     }
-    if (!is.character(regressors) | !is.null(regressors)) {
-      stop("regressors must be a character vector or NULL")
+    if (!is.element("formula", class(regressors))) {
+      stop("regressors must be a formula")
     }
     if (length(add_reference) != 1 | !is.logical(add_reference)) {
       stop("add_reference must be a single logical value")

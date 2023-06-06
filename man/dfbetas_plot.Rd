@@ -7,7 +7,7 @@
 dfbetas_plot(
   model,
   id_n = 3,
-  regressors = NULL,
+  regressors = ~.,
   add_reference = TRUE,
   ...,
   text_arglist = list(),
@@ -22,9 +22,9 @@ dfbetas_plot(
 \item{id_n}{The number of points to identify with labels.
 The default is \code{3}.}
 
-\item{regressors}{A character vector with the \code{model}
-regressors for
-which to plot the \code{dfbetas} statistics.}
+\item{regressors}{A formula describing the regressors for
+which to plot the \code{dfbetas} statistics. The
+default is all available regressors.}
 
 \item{add_reference}{A logical value indicating whether a
 reference line should be added. The default is
@@ -60,7 +60,7 @@ default if \code{add_reference} is \code{TRUE}.
 lmod <- lm(Petal.Length ~ Sepal.Length + Species,
            data = iris)
 dfbetas_plot(lmod)
-dfbetas_plot(lmod, regressors = "Sepal.Length", id_n = 4)
+dfbetas_plot(lmod, regressors = ~ Sepal.Length, id_n = 4)
 }
 \seealso{
 \code{\link[graphics]{plot}},
