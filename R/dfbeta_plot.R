@@ -1,27 +1,26 @@
-#' dfbetas index plots
+#' dfbeta index plots
 #'
-#' \code{dfbetas_plot} creates index plot of the
-#' \code{dfbetas} statistics for each regressor.
+#' \code{dfbeta_plot} creates an index plot of the
+#' \code{dfbeta} statistics for each regressor.
 #'
-#' A horizontal reference line is added at -1 and +1 by
+#' A horizontal reference line is added at +/- the
+#' estimated standard error of each coefficient by
 #' default if \code{add_reference} is \code{TRUE}.
 #'
-#' @inheritParams residual_plot.lm
-#' @param regressors A formula describing the regressors for
-#'   which to plot the \code{dfbetas} statistics. The
-#'   default is all available regressors.
+#' @inheritParams dfbetas_plot
 #' @author Joshua French
 #' @seealso \code{\link[graphics]{plot}},
 #'   \code{\link[graphics]{text}},
 #'   \code{\link[graphics]{abline}}
-#'   \code{\link[stats]{dfbetas}}.
+#'   \code{\link[stats]{dfbeta}}.
 #' @export
 #' @examples
 #' lmod <- lm(murder ~ hs_grad + urban + poverty + single,
 #'            data = crime2009)
-#' dfbetas_plot(lmod)
-#' dfbetas_plot(lmod, regressors = ~ hs_grad, id_n = 4)
-dfbetas_plot <-
+#' dfbeta_plot(lmod)
+#' dfbeta_plot(lmod, regressors = ~ hs_grad + poverty,
+#'             id_n = 1)
+dfbeta_plot <-
   function(model,
            id_n = 3,
            regressors = ~ .,
@@ -33,8 +32,8 @@ dfbetas_plot <-
   arglist <- list(...)
 
   # determine first-order variables in original model
-  dfbetas_stats <- stats::dfbetas(model)
-  dfbetas_names <- colnames(dfbetas_stats)
+  dfbeta_stats <- stats::dfbeta(model)
+  dfbeta_names <- colnames(dfbeta_stats)
 
   regressor_names <-
     labels(stats::terms(regressors,
@@ -44,34 +43,40 @@ dfbetas_plot <-
     wi <- which(regressor_names == "`(Intercept)`")
     regressor_names[wi] <- "(Intercept)"
   }
-  rcheck <- is.element(regressor_names, dfbetas_names)
+  rcheck <- is.element(regressor_names, dfbeta_names)
   if(any(!rcheck)) {
     rbad <- paste(regressor_names[!rcheck], collapse = ", ")
     stop(paste("The regressors provided do not match",
-               "the regressor names produced by dfbetas.",
+               "the regressor names produced by dfbeta.",
                "The problem appears to be", rbad))
 
   }
-  dfbetas_names <- intersect(dfbetas_names, regressor_names)
-  dfbetas_stats <-
-    dfbetas_stats[, dfbetas_names, drop = FALSE]
+  # get overlapping dfbeta variables
+  dfbeta_names <- intersect(dfbeta_names, regressor_names)
+  dfbeta_stats <-
+    dfbeta_stats[, dfbeta_names, drop = FALSE]
+
+  # determine ses of estimates for plotting
+  dfbeta_ses <- sqrt(diag(stats::vcov(model)))
+  w_ses <- match(dfbeta_names, names(dfbeta_ses))
+  dfbeta_ses <- dfbeta_ses[w_ses]
 
   # save current par values
   curpar <- graphics::par(no.readonly = TRUE)
   # adjust for multiple plots
-  graphics::par(mfrow = auto_mfrow(length(dfbetas_names)))
+  graphics::par(mfrow = auto_mfrow(length(dfbeta_names)))
   if (is.null(arglist$xlab)) {
     arglist$xlab <- "index"
   }
-  if (add_reference & is.null(abline_arglist$h)) {
-    abline_arglist$h <- c(-1, 1)
-  }
-  # index plot for each dfbetas statistic
-  for (j in seq_along(dfbetas_names)) {
-    # get elements for current dfbetas statistic
+
+  set_h <- ifelse(is.null(abline_arglist$h), TRUE, FALSE)
+
+  # index plot for each dfbeta statistic
+  for (j in seq_along(dfbeta_names)) {
+    # get elements for current dfbeta statistic
     temp_elements <-
       index_plot_dfbetas_elements(
-        model, dfbetas_stats[,j]
+        model, dfbeta_stats[,j]
         )
     temp_x <- temp_elements$x
     temp_y <- temp_elements$y
@@ -80,7 +85,11 @@ dfbetas_plot <-
                       decreasing = TRUE)[seq_len(id_n)]
 
     # set y-axis label
-    arglist$ylab <- dfbetas_names[j]
+    arglist$ylab <- dfbeta_names[j]
+
+    if (add_reference & set_h) {
+      abline_arglist$h <- c(-1, 1) * dfbeta_ses[j]
+    }
 
     index_plot_raw(x = temp_x,
                    y = temp_y,
@@ -96,12 +105,12 @@ dfbetas_plot <-
   on.exit(graphics::par(curpar))
 }
 
-#' Check arguments of dfbetas_plot
+#' Check arguments of dfbeta_plot
 #'
 #' @inheritParams residual_plot.lm
 #' @keywords internal
 #' @return NULL
-arg_check_dfbetas_plot <-
+arg_check_dfbeta_plot <-
   function(model, id_n, regressors, add_reference,
            text_arglist, abline_arglist,
            extendrange_f) {

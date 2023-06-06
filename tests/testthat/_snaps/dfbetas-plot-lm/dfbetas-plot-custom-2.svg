@@ -112,16 +112,11 @@
 <text transform='translate(8.55,139.25) rotate(-90)' text-anchor='middle' style='font-size: 7.92px; font-family: sans;' textLength='36.10px' lengthAdjust='spacingAndGlyphs'>(Intercept)</text>
 </g>
 <g clip-path='url(#cpMzguOTd8MjIwLjA0fDM4Ljk3fDIzOS41Mw==)'>
-<line x1='38.97' y1='115.57' x2='220.04' y2='115.57' style='stroke-width: 0.75; stroke: #BEBEBE; stroke-dasharray: 1.00,3.00;' />
-<line x1='38.97' y1='26.20' x2='220.04' y2='26.20' style='stroke-width: 0.75; stroke: #BEBEBE; stroke-dasharray: 1.00,3.00;' />
+<line x1='38.97' y1='79.83' x2='220.04' y2='79.83' style='stroke-width: 1.50; stroke: #FF0000; stroke-dasharray: 2.00,6.00;' />
+<line x1='38.97' y1='61.95' x2='220.04' y2='61.95' style='stroke-width: 1.50; stroke: #FF0000; stroke-dasharray: 2.00,6.00;' />
 </g>
 <g clip-path='url(#cpMC4wMHwyNDAuMDB8MC4wMHwyODguMDA=)'>
-<text x='74.87' y='222.47' style='font-size: 5.94px; font-family: sans;' textLength='51.50px' lengthAdjust='spacingAndGlyphs'>District of Columbia</text>
-<text x='197.55' y='60.56' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='19.81px' lengthAdjust='spacingAndGlyphs'>Virginia</text>
-<text x='174.07' y='84.92' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='35.01px' lengthAdjust='spacingAndGlyphs'>Rhode Island</text>
-<text x='167.37' y='62.20' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='19.82px' lengthAdjust='spacingAndGlyphs'>Oregon</text>
-<text x='115.11' y='62.38' style='font-size: 5.94px; font-family: sans;' textLength='24.43px' lengthAdjust='spacingAndGlyphs'>Maryland</text>
-<text x='108.41' y='62.74' style='font-size: 5.94px; font-family: sans;' textLength='25.43px' lengthAdjust='spacingAndGlyphs'>Louisiana</text>
+<text x='74.87' y='224.74' style='font-size: 15.84px; fill: #0000FF; font-family: sans;' textLength='137.33px' lengthAdjust='spacingAndGlyphs'>District of Columbia</text>
 </g>
 <defs>
   <clipPath id='cpMjc4Ljk3fDQ2MC4wNHwzOC45N3wyMzkuNTM='>
@@ -216,16 +211,11 @@
 <text transform='translate(248.55,139.25) rotate(-90)' text-anchor='middle' style='font-size: 7.92px; font-family: sans;' textLength='28.63px' lengthAdjust='spacingAndGlyphs'>hs_grad</text>
 </g>
 <g clip-path='url(#cpMjc4Ljk3fDQ2MC4wNHwzOC45N3wyMzkuNTM=)'>
-<line x1='278.97' y1='255.92' x2='460.04' y2='255.92' style='stroke-width: 0.75; stroke: #BEBEBE; stroke-dasharray: 1.00,3.00;' />
-<line x1='278.97' y1='157.61' x2='460.04' y2='157.61' style='stroke-width: 0.75; stroke: #BEBEBE; stroke-dasharray: 1.00,3.00;' />
+<line x1='278.97' y1='216.60' x2='460.04' y2='216.60' style='stroke-width: 1.50; stroke: #FF0000; stroke-dasharray: 2.00,6.00;' />
+<line x1='278.97' y1='196.93' x2='460.04' y2='196.93' style='stroke-width: 1.50; stroke: #FF0000; stroke-dasharray: 2.00,6.00;' />
 </g>
 <g clip-path='url(#cpMjQwLjAwfDQ4MC4wMHwwLjAwfDI4OC4wMA==)'>
-<text x='314.87' y='60.56' style='font-size: 5.94px; font-family: sans;' textLength='51.50px' lengthAdjust='spacingAndGlyphs'>District of Columbia</text>
-<text x='348.41' y='222.47' style='font-size: 5.94px; font-family: sans;' textLength='25.43px' lengthAdjust='spacingAndGlyphs'>Louisiana</text>
-<text x='414.07' y='195.93' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='35.01px' lengthAdjust='spacingAndGlyphs'>Rhode Island</text>
-<text x='437.55' y='222.11' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='19.81px' lengthAdjust='spacingAndGlyphs'>Virginia</text>
-<text x='368.53' y='196.69' style='font-size: 5.94px; font-family: sans;' textLength='28.72px' lengthAdjust='spacingAndGlyphs'>Mississippi</text>
-<text x='407.37' y='221.29' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='19.82px' lengthAdjust='spacingAndGlyphs'>Oregon</text>
+<text x='314.87' y='62.84' style='font-size: 15.84px; fill: #0000FF; font-family: sans;' textLength='137.33px' lengthAdjust='spacingAndGlyphs'>District of Columbia</text>
 </g>
 <defs>
   <clipPath id='cpNTE4Ljk3fDcwMC4wNHwzOC45N3wyMzkuNTM='>
@@ -326,16 +316,11 @@
 <text transform='translate(488.55,139.25) rotate(-90)' text-anchor='middle' style='font-size: 7.92px; font-family: sans;' textLength='20.26px' lengthAdjust='spacingAndGlyphs'>urban</text>
 </g>
 <g clip-path='url(#cpNTE4Ljk3fDcwMC4wNHwzOC45N3wyMzkuNTM=)'>
-<line x1='518.97' y1='317.34' x2='700.04' y2='317.34' style='stroke-width: 0.75; stroke: #BEBEBE; stroke-dasharray: 1.00,3.00;' />
-<line x1='518.97' y1='28.12' x2='700.04' y2='28.12' style='stroke-width: 0.75; stroke: #BEBEBE; stroke-dasharray: 1.00,3.00;' />
+<line x1='518.97' y1='201.65' x2='700.04' y2='201.65' style='stroke-width: 1.50; stroke: #FF0000; stroke-dasharray: 2.00,6.00;' />
+<line x1='518.97' y1='143.81' x2='700.04' y2='143.81' style='stroke-width: 1.50; stroke: #FF0000; stroke-dasharray: 2.00,6.00;' />
 </g>
 <g clip-path='url(#cpNDgwLjAwfDcyMC4wMHwwLjAwfDI4OC4wMA==)'>
-<text x='608.53' y='60.56' style='font-size: 5.94px; font-family: sans;' textLength='28.72px' lengthAdjust='spacingAndGlyphs'>Mississippi</text>
-<text x='554.87' y='103.44' style='font-size: 5.94px; font-family: sans;' textLength='51.50px' lengthAdjust='spacingAndGlyphs'>District of Columbia</text>
-<text x='690.96' y='222.47' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='24.76px' lengthAdjust='spacingAndGlyphs'>Wyoming</text>
-<text x='571.64' y='137.98' style='font-size: 5.94px; font-family: sans;' textLength='16.50px' lengthAdjust='spacingAndGlyphs'>Illinois</text>
-<text x='531.40' y='140.22' style='font-size: 5.94px; font-family: sans;' textLength='17.83px' lengthAdjust='spacingAndGlyphs'>Alaska</text>
-<text x='674.19' y='142.83' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='22.45px' lengthAdjust='spacingAndGlyphs'>Vermont</text>
+<text x='608.53' y='62.84' style='font-size: 15.84px; fill: #0000FF; font-family: sans;' textLength='76.59px' lengthAdjust='spacingAndGlyphs'>Mississippi</text>
 </g>
 <defs>
   <clipPath id='cpMzguOTd8MjIwLjA0fDMyNi45N3w1MjcuNTM='>
@@ -432,16 +417,11 @@
 <text transform='translate(8.55,427.25) rotate(-90)' text-anchor='middle' style='font-size: 7.92px; font-family: sans;' textLength='25.98px' lengthAdjust='spacingAndGlyphs'>poverty</text>
 </g>
 <g clip-path='url(#cpMzguOTd8MjIwLjA0fDMyNi45N3w1MjcuNTM=)'>
-<line x1='38.97' y1='552.88' x2='220.04' y2='552.88' style='stroke-width: 0.75; stroke: #BEBEBE; stroke-dasharray: 1.00,3.00;' />
-<line x1='38.97' y1='375.60' x2='220.04' y2='375.60' style='stroke-width: 0.75; stroke: #BEBEBE; stroke-dasharray: 1.00,3.00;' />
+<line x1='38.97' y1='481.97' x2='220.04' y2='481.97' style='stroke-width: 1.50; stroke: #FF0000; stroke-dasharray: 2.00,6.00;' />
+<line x1='38.97' y1='446.52' x2='220.04' y2='446.52' style='stroke-width: 1.50; stroke: #FF0000; stroke-dasharray: 2.00,6.00;' />
 </g>
 <g clip-path='url(#cpMC4wMHwyNDAuMDB8Mjg4LjAwfDU3Ni4wMA==)'>
-<text x='74.87' y='348.56' style='font-size: 5.94px; font-family: sans;' textLength='51.50px' lengthAdjust='spacingAndGlyphs'>District of Columbia</text>
-<text x='115.11' y='510.47' style='font-size: 5.94px; font-family: sans;' textLength='24.43px' lengthAdjust='spacingAndGlyphs'>Maryland</text>
-<text x='197.55' y='493.40' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='19.81px' lengthAdjust='spacingAndGlyphs'>Virginia</text>
-<text x='167.37' y='489.98' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='19.82px' lengthAdjust='spacingAndGlyphs'>Oregon</text>
-<text x='174.07' y='444.43' text-anchor='end' style='font-size: 5.94px; font-family: sans;' textLength='35.01px' lengthAdjust='spacingAndGlyphs'>Rhode Island</text>
-<text x='51.40' y='445.10' style='font-size: 5.94px; font-family: sans;' textLength='17.83px' lengthAdjust='spacingAndGlyphs'>Alaska</text>
+<text x='74.87' y='350.84' style='font-size: 15.84px; fill: #0000FF; font-family: sans;' textLength='137.33px' lengthAdjust='spacingAndGlyphs'>District of Columbia</text>
 </g>
 <defs>
   <clipPath id='cpMjc4Ljk3fDQ2MC4wNHwzMjYuOTd8NTI3LjUz'>
@@ -540,16 +520,11 @@
 <text transform='translate(248.55,427.25) rotate(-90)' text-anchor='middle' style='font-size: 7.92px; font-family: sans;' textLength='20.69px' lengthAdjust='spacingAndGlyphs'>single</text>
 </g>
 <g clip-path='url(#cpMjc4Ljk3fDQ2MC4wNHwzMjYuOTd8NTI3LjUz)'>
-<line x1='278.97' y1='523.00' x2='460.04' y2='523.00' style='stroke-width: 0.75; stroke: #BEBEBE; stroke-dasharray: 1.00,3.00;' />
-<line x1='278.97' y1='449.97' x2='460.04' y2='449.97' style='stroke-width: 0.75; stroke: #BEBEBE; stroke-dasharray: 1.00,3.00;' />
+<line x1='278.97' y1='493.79' x2='460.04' y2='493.79' style='stroke-width: 1.50; stroke: #FF0000; stroke-dasharray: 2.00,6.00;' />
+<line x1='278.97' y1='479.18' x2='460.04' y2='479.18' style='stroke-width: 1.50; stroke: #FF0000; stroke-dasharray: 2.00,6.00;' />
 </g>
 <g clip-path='url(#cpMjQwLjAwfDQ4MC4wMHwyODguMDB8NTc2LjAw)'>
-<text x='314.87' y='348.56' style='font-size: 5.94px; font-family: sans;' textLength='51.50px' lengthAdjust='spacingAndGlyphs'>District of Columbia</text>
-<text x='368.53' y='510.47' style='font-size: 5.94px; font-family: sans;' textLength='28.72px' lengthAdjust='spacingAndGlyphs'>Mississippi</text>
-<text x='324.93' y='501.46' style='font-size: 5.94px; font-family: sans;' textLength='17.83px' lengthAdjust='spacingAndGlyphs'>Hawaii</text>
-<text x='355.11' y='477.24' style='font-size: 5.94px; font-family: sans;' textLength='24.43px' lengthAdjust='spacingAndGlyphs'>Maryland</text>
-<text x='348.41' y='477.56' style='font-size: 5.94px; font-family: sans;' textLength='25.43px' lengthAdjust='spacingAndGlyphs'>Louisiana</text>
-<text x='291.40' y='498.22' style='font-size: 5.94px; font-family: sans;' textLength='17.83px' lengthAdjust='spacingAndGlyphs'>Alaska</text>
+<text x='314.87' y='350.84' style='font-size: 15.84px; fill: #0000FF; font-family: sans;' textLength='137.33px' lengthAdjust='spacingAndGlyphs'>District of Columbia</text>
 </g>
 <defs>
   <clipPath id='cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng=='>
