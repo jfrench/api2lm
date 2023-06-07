@@ -12,7 +12,7 @@ test_that("sl_plot.lm produces correct results", {
     sl_plot(lmod, xaxis = "pred",
                   predictors = ~ Sepal.Length, id_n = 2)
   }
-  expect_doppelganger("sl_plot Sepal.Length", p)
+  expect_doppelganger("sl_plot Sepal_Length", p)
   p <- function() {
     sl_plot(lmod, xaxis = "pred",
             predictors = ~ Species, id_n = 2)
