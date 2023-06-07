@@ -19,8 +19,8 @@
 #' lmod2 <- lm(murder ~ hs_grad + urban + poverty + single,
 #'             data = crime2009[-9, ])
 #' #compare coefficients of models
-#' compare_coef(lmod1, lmod2)
-compare_coef <- function(model1, model2, digits = 3) {
+#' coef_compare(lmod1, lmod2)
+coef_compare <- function(model1, model2, digits = 3) {
   if (!is.element("lm", class(model1))) {
     stop("model 1 must be an lm object")
   }
@@ -32,25 +32,75 @@ compare_coef <- function(model1, model2, digits = 3) {
     stop("The models must have the same coefficients")
   }
   temp = lapply(seq_len(length(stats::coef(model1))),
-                        combine_coefs,
+                combine_coefs,
                 a = t(stats::summary.lm(model1)$coef[,1:2]),
                 b = t(stats::summary.lm(model2)$coef[,1:2]),
                 digits = digits)
-  # combine lists into single data frame
+  # combine lists into single matrix
   temp = do.call(rbind, temp)
-  # format data frame
-  print.data.frame(temp, row.names = FALSE)
+  # print matrix
+  print(temp, quote = FALSE, right = TRUE)
+  return(invisible(temp))
 }
 
+#' Combine coefficients
+#'
+#' Combine coefficients and standard errors from two
+#' fitted models
+#'
+#' @param i Index of coefficients
+#' @param a Coefficients and standard errors from Model 1
+#' @param b Coefficients and standard errors from Model 2
+#' @inheritParams coef_compare
+#' @return A character matrix
+#' @keywords internal
 combine_coefs <- function(i, a, b, digits = NULL) {
-  temp = data.frame(` ` = c(colnames(a)[i], "Std.Error", ""),
-                    `Model 1` = c(a[,i], NA),
-                    `Model 2` = c(b[,i], NA),
-                    check.names = FALSE)
-  # temp = replace(temp, is.na(temp), "")
-  temp = format(temp, trim = TRUE, digits = digits)
-  temp[3,2:3] <- ""
-  # temp <- sapply(temp, as.character)
-  # temp <- rbind(temp, c("", "", ""))
-  temp
+  # create initial matrix
+  temp = cbind(c(a[,i], NA),
+               c(b[,i], NA),
+               c(100 * (b[,i] - a[,i])/a[,i], NA))
+  # format matrix
+  temp <- format(temp, digits = digits)
+  # replace NA with "  "
+  temp[3, 1] <- sub("NA", "  ", temp[3, 1])
+  temp[3, 2] <- sub("NA", "  ", temp[3, 1])
+  temp[3, 3] <- sub("NA", "  ", temp[3, 1])
+  # create column names
+  colnames(temp) <- c("Model 1", "Model 2", "pct_change")
+  # return temp
+  return(temp)
 }
+
+# combine_coefs3 <- function(i, a, b, digits = NULL) {
+#   # create initial matrix
+#   temp = cbind(c(a[,i], NA),
+#                c(b[,i], NA),
+#                c(100 * (b[,i] - a[,i])/a[,i], NA))
+#   # create column names
+#   colnames(temp) <- c("Model 1", "Model 2", "pct_change")
+#   # return temp
+#   as.table(temp)
+# }
+#
+# coef_compare3 <- function(model1, model2, digits = 3) {
+#   if (!is.element("lm", class(model1))) {
+#     stop("model 1 must be an lm object")
+#   }
+#   if (!is.element("lm", class(model1))) {
+#     stop("model 2 must be an lm object")
+#   }
+#   if (!identical(names(stats::coef(model1)),
+#                  names(stats::coef(model2)))) {
+#     stop("The models must have the same coefficients")
+#   }
+#   temp = lapply(seq_len(length(stats::coef(model1))),
+#                 combine_coefs3,
+#                 a = t(stats::summary.lm(model1)$coef[,1:2]),
+#                 b = t(stats::summary.lm(model2)$coef[,1:2]),
+#                 digits = digits)
+#   # combine lists into single table
+#   temp = do.call(rbind, temp)
+#   # print table
+#   print.table(temp, right = TRUE)
+#   return(invisible(temp))
+# }
