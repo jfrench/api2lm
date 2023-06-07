@@ -3,10 +3,10 @@ if (require("vdiffr")) {
     lmod <- lm(price ~ sqft_living, data = home_sales)
     p <- function() cooks_plot(lmod)
     expect_doppelganger("default cooks_plot", p)
-    p <- function() leverage_plot(lmod, id_n = 6)
+    p <- function() cooks_plot(lmod, id_n = 6)
     expect_doppelganger("cooks_plot custom 1", p)
     p <- function() {
-      leverage_plot(lmod, add_reference = FALSE)
+      cooks_plot(lmod, add_reference = FALSE)
     }
     expect_doppelganger("cooks_plot no reference", p)
     p <- function() {
