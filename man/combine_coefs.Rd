@@ -12,6 +12,11 @@ combine_coefs(i, a, b, digits = NULL)
 \item{a}{Coefficients and standard errors from Model 1}
 
 \item{b}{Coefficients and standard errors from Model 2}
+
+\item{digits}{A positive integer indicating how many
+significant digits are to be used for numeric and
+complex numbers. This argument is passed to
+\code{\link[base]{format}}.}
 }
 \value{
 A character matrix

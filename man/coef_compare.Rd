@@ -4,7 +4,7 @@
 \alias{coef_compare}
 \title{Compare coefficients of 2 models}
 \usage{
-coef_compare(model1, model2, digits = 3)
+coef_compare(model1, model2, digits = 3, verbose = TRUE)
 }
 \arguments{
 \item{model1}{A fitted model object from the
@@ -13,10 +13,16 @@ coef_compare(model1, model2, digits = 3)
 \item{model2}{A fitted model object from the
 \code{\link[stats]{lm}} function.}
 
-\item{inheritParms}{}
+\item{digits}{A positive integer indicating how many
+significant digits are to be used for numeric and
+complex numbers. This argument is passed to
+\code{\link[base]{format}}.}
+
+\item{verbose}{A logical value indicating whether the
+matrix should be printed. The default is \code{TRUE}.}
 }
 \value{
-A data frame
+A matrix.
 }
 \description{
 Compare the coefficients to two fitted models. The models
