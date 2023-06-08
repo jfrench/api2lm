@@ -10,27 +10,29 @@ of Chicago.
 \url{https://geodacenter.github.io/data-and-lab//KingCounty-HouseSales2015/}
 
 These data were created by selectively choosing a subset
-of observations from the `home_prices` data set in the
+of observations from the \code{home_prices} data set in the
 **KingCountyHomes** package.
 }
 \value{
-A `data.frame`.
+A \code{data.frame}.
 }
 \description{
-The `home_sales` data set is a data frame consisting of
+The \code{home_sales} data set is a data frame consisting of
 216 rows and 8 columns. The data are a subset of home
 sales in King County, WA made between 2014-05-02 to
 2015-05-27. The variables in the data set are:
-- `price`: sale price (in log10 US dollars).
-- `bedrooms`: number of bedrooms.
-- `bathrooms`: number of bathrooms.
-- `sqft_living`: size of living space in square feet.
-- `sqft_lot`: lot size in square feet.
-- `floors`: number of floors in home.
-- `waterfront`: a `factor` variable with levels `no` and `yes`
+\itemize{
+\item \code{price}: sale price (in log10 US dollars).
+\item \code{bedrooms}: number of bedrooms.
+\item \code{bathrooms}: number of bathrooms.
+\item \code{sqft_living}: size of living space in square feet.
+\item \code{sqft_lot}: lot size in square feet.
+\item \code{floors}: number of floors in home.
+\item \code{waterfront}: a \code{factor} variable with levels \code{no} and `yes`
 that indicate whether the home has a waterfront view.
-- `condition`: a `factor` variable indicating the condition of the house with levels
-ranging from `poor` to `very good`.
+\item \code{condition}: a \code{factor} variable indicating the condition of the house with levels
+ranging from \code{poor} to \code{very good}.
+}
 }
 \examples{
 data(home_sales)
