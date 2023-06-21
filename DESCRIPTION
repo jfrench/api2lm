@@ -1,10 +1,10 @@
 Package: api2lm
 Type: Package
 Title: Functions and Data Sets for the Book "A Progressive Introduction to Linear Models"
-Version: 0.2
+Version: 0.2.1
 Author: Joshua P. French
 Maintainer: Joshua P. French <joshua.french@ucdenver.edu>
-Description: Simplifies aspects of linear regression analysis, particularly simultaneous inference. Additionally, supports "A Progressive Introduction to Linear Models" by Joshua French (<https://jfrench.github.io/LinearRegression/>).
+Description: A lightweight package supporting aspects of linear regression analysis such as simultaneous inference and diagnostics. Additionally, supports "A Progressive Introduction to Linear Models" by Joshua French (<https://jfrench.github.io/LinearRegression/>).
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
