@@ -73,12 +73,10 @@ a matrix with a column per term and may have an attribute
 
 If \code{se.fit} is \code{TRUE}, a
 list with the following components is returned:
-\itemize{
  \item{\code{fit}}{: vector or matrix as above}
  \item{\code{se.fit}}{: standard error of predicted means}
  \item{\code{residual.scale}}{: residual standard deviations}
  \item{\code{df}}{: degrees of freedom for residual}
-}
 }
 \description{
 A function to produce adjusted confidence/prediction

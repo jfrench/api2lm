@@ -63,12 +63,10 @@
 #'
 #' If \code{se.fit} is \code{TRUE}, a
 #' list with the following components is returned:
-#' \itemize{
 #'  \item{\code{fit}}{: vector or matrix as above}
 #'  \item{\code{se.fit}}{: standard error of predicted means}
 #'  \item{\code{residual.scale}}{: residual standard deviations}
 #'  \item{\code{df}}{: degrees of freedom for residual}
-#' }
 #' @export
 #' @seealso \code{\link[stats]{predict.lm}}
 #' @references
